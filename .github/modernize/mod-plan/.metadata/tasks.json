@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "metadata": {
+    "planName": "mod-plan",
+    "projectName": "ContosoUniversity",
+    "language": "dotnet",
+    "createdAt": "2026-08-06T13:29:10.000Z",
+    "version": "1.0"
+  },
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-dotnet",
+      "description": "Upgrade the ContosoUniversity project from .NET Framework 4.8 to .NET 10 (net10.0), converting it to a modern SDK-style project.",
+      "reason": ".NET Framework 4.8 is on a Windows-only, non-containerizable stack and does not support modern Azure SDK packages (Azure.*) targeting netstandard2.0 reliably. Upgrading to .NET 10 enables container deployment, the full modern Azure SDK, and long-term support.",
+      "requirements": "Upgrade the ASP.NET MVC 5.x application from .NET Framework 4.8 to .NET 10. Convert the legacy non-SDK-style .csproj to SDK-style format. Migrate from ASP.NET MVC 5 to ASP.NET Core MVC. Update all NuGet packages to versions compatible with net10.0. Remove Windows-specific APIs and references (System.Messaging, System.Web, Web.config). Ensure the project builds and all unit tests pass after the upgrade.",
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-msmq-to-servicebus",
+      "description": "Migrate the MSMQ-based admin notification system (NotificationService) to Azure Service Bus for cloud-native, reliable messaging.",
+      "reason": "The current notification system uses System.Messaging (MSMQ), a Windows-only technology that is unavailable in Linux containers and Azure-hosted environments. Azure Service Bus provides equivalent reliable messaging with cloud-native availability and Managed Identity support. Addresses issues: MSMQ dependency blocks container deployment, Windows-only System.Messaging API.",
+      "requirements": "Replace all System.Messaging (MSMQ) usage in NotificationService.cs with Azure Service Bus. Migrate message send and receive operations to Azure Service Bus queues. Use Managed Identity (DefaultAzureCredential) for authentication — no connection strings or secrets in code. Update appsettings to reference the Service Bus namespace endpoint instead of the MSMQ queue path. Ensure the notification send/receive functionality is preserved end-to-end.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-azure-servicebus",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-localstorage-to-blob",
+      "description": "Migrate teaching material image uploads from local file system storage (/Uploads/TeachingMaterials/) to Azure Blob Storage.",
+      "reason": "The current implementation stores uploaded images on the local file system, which is ephemeral and unavailable across container restarts or multiple container instances. Azure Blob Storage provides durable, scalable, and cloud-native file storage. Addresses issues: Local file system storage incompatible with containerized deployment, no persistence across container restarts.",
+      "requirements": "Replace local file system read/write operations for teaching material image uploads with Azure Blob Storage SDK calls. Use Managed Identity (DefaultAzureCredential) for authentication — no connection strings or storage account keys in code. Preserve the existing upload, retrieval, and deletion functionality. Update configuration to reference the storage account endpoint and container name. Ensure backward compatibility for existing image paths stored in the database.",
+      "dependencies": ["002-transform-msmq-to-servicebus"],
+      "skills": [
+        {
+          "name": "migration-azure-storage-blob",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "004-transform-sqlserver-to-azure-sql",
+      "description": "Migrate the SQL Server (LocalDB) database connection to Azure SQL Database with Managed Identity (passwordless) authentication.",
+      "reason": "The current connection string uses Integrated Security on a LocalDB instance, which is unavailable in cloud or containerized environments. Azure SQL Database with Managed Identity provides a secure, passwordless, and cloud-native database solution. Addresses issues: LocalDB not available in Azure/containers, connection string uses Windows-integrated security incompatible with Linux containers.",
+      "requirements": "Update the Entity Framework Core configuration to connect to Azure SQL Database. Replace the Windows Integrated Security connection string with an Azure SQL Database connection string. Use Managed Identity (DefaultAzureCredential) for authentication — no passwords or secrets in the connection string. Ensure all EF Core migrations and database operations continue to work correctly against Azure SQL Database.",
+      "dependencies": ["003-transform-localstorage-to-blob"],
+      "skills": [
+        {
+          "name": "migration-azure-sql-database",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "005-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate any identified vulnerabilities to ensure the application is secure before deployment.",
+      "reason": "Security compliance is required before deployment. Vulnerable dependencies can expose the application to known exploits. This task ensures all packages are patched to their minimum safe versions.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "environmentConfiguration": "Runtime environment established by the .NET 10 upgrade task. Build tool: dotnet CLI.",
+      "dependencies": ["004-transform-sqlserver-to-azure-sql"],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "006-deployment-azure-container-apps",
+      "description": "Containerize the modernized ContosoUniversity application and deploy it to Azure Container Apps.",
+      "reason": "The target deployment platform is Azure Container Apps, which requires a containerized application. This task produces a Dockerfile and deploys the app to Azure Container Apps using Azure CLI.",
+      "requirements": "Create a Dockerfile for the ASP.NET Core (.NET 10) application. Build and push the container image to Azure Container Registry. Deploy the container image to Azure Container Apps. Configure environment variables for Azure SQL Database endpoint, Azure Service Bus namespace endpoint, and Azure Blob Storage account endpoint. Use Managed Identity for all Azure service authentication.",
+      "dependencies": ["005-security-cve-remediation"],
+      "targetAzureService": "azurecontainerapp",
+      "resourceStatus": "New resource to be created",
+      "deploymentTool": "bicep",
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ]
+    }
+  ]
+}
