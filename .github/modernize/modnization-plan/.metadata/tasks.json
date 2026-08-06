@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "setupBaseline",
+      "id": "000-setupBaseline",
+      "description": "Capture the current ContosoUniversity behavior and test baseline before Azure migration work begins.",
+      "reason": "A frozen baseline is required because the plan includes an integration verification task.",
+      "requirements": "Snapshot the repository-root ASP.NET MVC application before migration work begins, document the current SQL Server, MSMQ, and local upload behaviors, and freeze the integration-test dependency strategy for later verification. Snapshot folder: .",
+      "dependencies": [],
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "001-transform-azure-sql",
+      "description": "Migrate application data persistence from local SQL Server to Azure SQL Database. Addresses issues: local SQL Server dependency.",
+      "reason": "The current application uses LocalDB/SQL Server and must move to an Azure-managed relational database service.",
+      "requirements": "Move the application's relational data access to Azure SQL Database while preserving the existing entity model, CRUD behavior, and configuration-driven connection flow. Use managed identity for Azure authentication and keep the database responsibilities scoped to the current application data store.",
+      "skills": [
+        {
+          "name": "migration-azure-sql-database",
+          "location": "builtin"
+        }
+      ],
+      "dependencies": [],
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-azure-servicebus",
+      "description": "Replace MSMQ-based administrator notifications with Azure Service Bus. Addresses issues: MSMQ dependency.",
+      "reason": "The notification feature depends on Windows-only MSMQ and must move to a cloud messaging service.",
+      "requirements": "Migrate the administrator notification workflow from MSMQ to Azure Service Bus while preserving the current create, update, and delete notification behavior and keeping messaging decoupled from the main request flow. Use managed identity authentication and preserve the existing notification feature scope.",
+      "skills": [
+        {
+          "name": "migration-azure-servicebus",
+          "location": "builtin"
+        }
+      ],
+      "dependencies": [
+        "001-transform-azure-sql"
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-azure-blob",
+      "description": "Move teaching material file uploads from the local file system to Azure Blob Storage. Addresses issues: local upload storage dependency.",
+      "reason": "The course material upload flow currently depends on server-local storage that is not appropriate for cloud-native hosting.",
+      "requirements": "Migrate teaching material image storage from the local `/Uploads/TeachingMaterials/` path to Azure Blob Storage while preserving upload validation, unique file naming, replacement cleanup, delete cleanup, and the current course display behavior. Use managed identity authentication and keep the existing course upload experience intact.",
+      "skills": [
+        {
+          "name": "migration-azure-storage-blob",
+          "location": "builtin"
+        }
+      ],
+      "dependencies": [
+        "002-transform-azure-servicebus"
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "integrationTest",
+      "id": "004-integrationTest",
+      "description": "Build integration tests for migrated Azure services and run post-migration verification",
+      "reason": "The plan needs a dedicated verification phase to confirm the migrated Azure-backed behaviors match the captured baseline.",
+      "requirements": "Create and run post-migration verification for Azure SQL Database, Azure Service Bus, and Azure Blob Storage using mock-mode dependencies because no provisioned Azure environment is defined for this plan. Validate the core student, course, instructor, and department workflows together with administrator notifications and teaching material upload behavior.",
+      "dependencies": [
+        "000-setupBaseline",
+        "001-transform-azure-sql",
+        "002-transform-azure-servicebus",
+        "003-transform-azure-blob"
+      ]
+    },
+    {
+      "type": "security",
+      "id": "005-security",
+      "description": "Scan migrated dependencies for known CVEs and remediate discovered vulnerabilities before deployment.",
+      "reason": "Every modernization plan must include a security remediation phase before the application is deployed.",
+      "requirements": "Scan all project dependencies for known CVEs and remediate any identified vulnerabilities across the migrated application, including data access, messaging, storage, and deployment-related dependencies. Upgrade vulnerable dependencies to the minimum patched version, document any required major-version changes and their breaking-change risk, and verify the project still builds and its tests pass after remediation.",
+      "dependencies": [
+        "001-transform-azure-sql",
+        "002-transform-azure-servicebus",
+        "003-transform-azure-blob",
+        "004-integrationTest"
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "deployment",
+      "id": "006-deployment",
+      "description": "Deploy the modernized ContosoUniversity application to Azure Container Apps.",
+      "reason": "The modernization target described by the repository context is Azure Container Apps.",
+      "requirements": "Containerize and deploy the modernized application to Azure Container Apps, wire the Azure SQL Database, Azure Service Bus, and Azure Blob Storage integrations through deployment-time configuration, and preserve the application's authenticated web experience without storing secrets in source control.",
+      "dependencies": [
+        "005-security"
+      ],
+      "skills": [
+        {
+          "name": "azcli-containerapp-deploy",
+          "location": "builtin"
+        }
+      ],
+      "targetAzureService": "azurecontainerapp",
+      "resourceStatus": "Create new Azure Container Apps deployment resources during execution",
+      "deploymentTool": "bicep"
+    }
+  ],
+  "metadata": {
+    "planName": "modnization-plan",
+    "projectName": "ContosoUniversity",
+    "language": "dotnet",
+    "createdAt": "2026-08-06T13:06:21.238+00:00",
+    "version": "1.0"
+  }
+}
