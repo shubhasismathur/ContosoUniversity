@@ -1,0 +1,127 @@
+{
+  "GeneratedAt": "2026-08-06T12:05:18.0000000Z",
+  "ProjectPath": "ContosoUniversity",
+  "Summary": {
+    "TotalFindings": 8,
+    "CveCount": 1,
+    "CweCount": 7,
+    "BySeverity": {
+      "mandatory": 2,
+      "optional": 3,
+      "potential": 3
+    },
+    "ByCategory": {
+      "CVE": 1,
+      "Code Quality": 3,
+      "Credentials & Secrets": 2,
+      "File & Path Security": 2
+    },
+    "TotalRulesAssessed": 59,
+    "RulesPassed": 52
+  },
+  "CveFindings": [
+    {
+      "Id": "CVE-2024-0056",
+      "Name": "Microsoft.Data.SqlClient and System.Data.SqlClient vulnerable to SQL Data Provider Security Feature Bypass",
+      "Category": "CVE",
+      "Severity": "mandatory",
+      "StoryPoint": 1,
+      "Description": "[CVE-2024-0056](https://github.com/advisories/GHSA-98g6-xh36-x2p7): Microsoft.Data.SqlClient and System.Data.SqlClient vulnerable to SQL Data Provider Security Feature Bypass\n\nSeverity: HIGH\n\nAffected dependencies:\n  - Microsoft.Data.SqlClient@2.1.4 (declared at packages.config) \u2014 affected range: < 2.1.7\n\nRecommended fix:\n  - Upgrade Microsoft.Data.SqlClient to 2.1.7 or later",
+      "Files": [
+        "ContosoUniversity/packages.config"
+      ],
+      "Explanation": "[CVE-2024-0056](https://github.com/advisories/GHSA-98g6-xh36-x2p7): Microsoft.Data.SqlClient and System.Data.SqlClient vulnerable to SQL Data Provider Security Feature Bypass\n\nSeverity: HIGH\n\nAffected dependencies:\n  - Microsoft.Data.SqlClient@2.1.4 (declared at packages.config) \u2014 affected range: < 2.1.7\n\nRecommended fix:\n  - Upgrade Microsoft.Data.SqlClient to 2.1.7 or later"
+    }
+  ],
+  "CweFindings": [
+    {
+      "Id": "CWE-477",
+      "Name": "Use of Obsolete Function",
+      "Category": "Code Quality",
+      "Severity": "optional",
+      "StoryPoint": 1,
+      "Description": "The code uses deprecated or obsolete functions, which suggests that the code has not been actively reviewed or maintained.",
+      "Files": [
+        "ContosoUniversity/Services/NotificationService.cs"
+      ],
+      "Explanation": "NotificationService uses System.Messaging.MessageQueue, which is a Windows-only legacy API that is not supported in .NET Core/.NET 5+ and has been superseded by modern cloud messaging services. The class uses MessageQueue.Create(), MessageQueue.Exists(), _queue.Send(), _queue.Receive(), and XmlMessageFormatter \u2014 all of which are part of the obsolete System.Messaging namespace. This API has no cross-platform or cloud-portable equivalent and is explicitly identified as a migration blocker by Microsoft's modernization tooling."
+    },
+    {
+      "Id": "CWE-772",
+      "Name": "Missing Release of Resource after Effective Lifetime",
+      "Category": "Code Quality",
+      "Severity": "potential",
+      "StoryPoint": 3,
+      "Description": "The product does not release a resource after its effective lifetime has ended, i.e., after the resource is no longer needed.",
+      "Files": [
+        "ContosoUniversity/Controllers/InstructorsController.cs"
+      ],
+      "Explanation": "InstructorsController.Dispose(bool disposing) (line ~252) calls `db.Dispose()` directly, and then calls `base.Dispose(disposing)`. BaseController.Dispose(bool disposing) also calls `db?.Dispose()` on the same instance. This results in a double-dispose of the SchoolContext DbContext object. While EF Core's DbContext.Dispose() is idempotent (safe to call multiple times without throwing), calling Dispose() on an already-disposed context leaves it in a permanently unusable state, and any subsequent operation on the context after the first Dispose() call would throw ObjectDisposedException. Additionally, DepartmentsController.Dispose() has the same double-dispose pattern at line ~167."
+    },
+    {
+      "Id": "CWE-1057",
+      "Name": "Data Access Operations Outside of Expected Data Manager Component",
+      "Category": "Code Quality",
+      "Severity": "potential",
+      "StoryPoint": 5,
+      "Description": "The product uses a dedicated, central data manager component as required by design, but it contains code that performs data-access operations that do not use this data manager.",
+      "Files": [
+        "ContosoUniversity/Controllers/StudentsController.cs",
+        "ContosoUniversity/Controllers/CoursesController.cs",
+        "ContosoUniversity/Controllers/DepartmentsController.cs",
+        "ContosoUniversity/Controllers/InstructorsController.cs",
+        "ContosoUniversity/Controllers/NotificationsController.cs"
+      ],
+      "Explanation": "All MVC controllers directly access the SchoolContext DbContext instance (db) inherited from BaseController, bypassing any service or repository layer. EF Core DbContext is intended to be the data access abstraction, but accessing it directly from controllers couples the presentation layer to the data access layer. For example, StudentsController.Index() executes LINQ queries directly against db.Students, CoursesController.Create() calls db.Courses.Add() and db.SaveChanges() directly, and InstructorsController.Edit() calls db.Entry().State = EntityState.Deleted directly. This violates separation of concerns and makes it impossible to unit test controllers without a real database connection."
+    },
+    {
+      "Id": "CWE-732",
+      "Name": "Incorrect Permission Assignment for Critical Resource",
+      "Category": "Credentials & Secrets",
+      "Severity": "optional",
+      "StoryPoint": 5,
+      "Description": "The product specifies permissions for a security-critical resource in a way that allows that resource to be read or modified by unintended actors.",
+      "Files": [
+        "ContosoUniversity/Services/NotificationService.cs"
+      ],
+      "Explanation": "NotificationService constructor (line 23) grants 'Everyone' full control over the MSMQ notification queue when it is created: `_queue.SetPermissions(\"Everyone\", MessageQueueAccessRights.FullControl)`. This allows any user or process on the Windows machine \u2014 including unauthenticated network users if the queue is remotely accessible \u2014 to read, write, delete, and administer the message queue. An attacker could inject arbitrary notification messages, drain the queue, or cause denial-of-service by flooding it. The queue should be restricted to the application's service account identity."
+    },
+    {
+      "Id": "CWE-778",
+      "Name": "Insufficient Logging",
+      "Category": "Credentials & Secrets",
+      "Severity": "potential",
+      "StoryPoint": 3,
+      "Description": "When a security-critical event occurs, the product either does not record the event or omits important details about the event when logging it.",
+      "Files": [
+        "ContosoUniversity/Controllers/BaseController.cs",
+        "ContosoUniversity/Services/NotificationService.cs"
+      ],
+      "Explanation": "Security-relevant events are not logged to a persistent, observable log store: (1) BaseController.SendEntityNotification() catches all exceptions from notification delivery and silently swallows them with only a Debug.WriteLine() call \u2014 these failures are invisible in production environments where the debugger is not attached; (2) NotificationService.SendNotification() and ReceiveNotification() catch exceptions and log only to Debug.WriteLine(), which is not written to any log file or monitoring system in production; (3) There is no logging of entity create/update/delete operations, authentication events, authorization decisions, or file upload events with user identity, timestamp, or IP address. The application has no structured logging framework (Serilog, NLog, Microsoft.Extensions.Logging providers) configured."
+    },
+    {
+      "Id": "CWE-22",
+      "Name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "Category": "File & Path Security",
+      "Severity": "optional",
+      "StoryPoint": 8,
+      "Description": "The product uses external input to construct a pathname that is intended to identify a file or directory that is located underneath a restricted parent directory, but the product does not properly neutralize special elements within the pathname that can cause the pathname to resolve to a location that is outside of the restricted directory.",
+      "Files": [
+        "ContosoUniversity/Controllers/CoursesController.cs"
+      ],
+      "Explanation": "In CoursesController.DeleteConfirmed (line ~229), the file path is reconstructed using `Server.MapPath(course.TeachingMaterialImagePath)` where `TeachingMaterialImagePath` is a value read from the database \u2014 but during the Create/Edit POST, the `[Bind]` attribute includes `TeachingMaterialImagePath` in the bound field list, meaning an attacker could submit a crafted value such as `~/../../sensitive/file` in the POST body, which could then be persisted to the database and subsequently used in `Server.MapPath()` to resolve a path outside the web root. There is no validation or sanitization of the `TeachingMaterialImagePath` field value before it is stored or used in file system operations."
+    },
+    {
+      "Id": "CWE-434",
+      "Name": "Unrestricted Upload of File with Dangerous Type",
+      "Category": "File & Path Security",
+      "Severity": "mandatory",
+      "StoryPoint": 8,
+      "Description": "The product allows the upload or transfer of dangerous file types that are automatically processed within its environment.",
+      "Files": [
+        "ContosoUniversity/Controllers/CoursesController.cs"
+      ],
+      "Explanation": "CoursesController.Create (line ~55) and CoursesController.Edit (line ~128) accept file uploads and validate the file type using only the file extension (`Path.GetExtension(teachingMaterialImage.FileName).ToLower()`). This check can be bypassed: (1) the MIME type / Content-Type header is not verified against the actual file content, allowing an attacker to upload a file with a valid image extension (e.g., `.jpg`) that contains executable script content; (2) on some IIS configurations, double extensions (e.g., `shell.asp;.jpg`) can bypass extension-only checks. The allowed extension list (`jpg`, `jpeg`, `png`, `gif`, `bmp`) is client-supplied filename-based only \u2014 no magic byte / file signature validation is performed."
+    }
+  ]
+}

@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Assessment Report – ContosoUniversity</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f3f4f6;color:#1f2937}
+.header{background:linear-gradient(135deg,#1e3a5f,#2563eb);color:white;padding:32px 40px}
+.header h1{font-size:28px;font-weight:700}
+.header p{opacity:.8;margin-top:4px}
+.container{max-width:1200px;margin:0 auto;padding:24px 16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.card{background:white;border-radius:8px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.card h3{color:#6b7280;font-size:13px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.card .val{font-size:36px;font-weight:700;color:#1f2937}
+.card .sub{font-size:12px;color:#9ca3af;margin-top:4px}
+.section{background:white;border-radius:8px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,.1);margin-bottom:24px}
+.section h2{font-size:20px;font-weight:600;margin-bottom:16px;color:#1f2937;border-bottom:2px solid #e5e7eb;padding-bottom:8px}
+.charts{display:flex;gap:32px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.legend{display:flex;flex-direction:column;gap:8px}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:14px}
+.legend-dot{width:12px;height:12px;border-radius:50%}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:8px;background:#f9fafb;border-bottom:2px solid #e5e7eb;font-size:13px;color:#6b7280;text-transform:uppercase}
+.tab-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tab-btn{padding:6px 14px;border:1px solid #d1d5db;border-radius:6px;background:white;cursor:pointer;font-size:13px}
+.tab-btn.active{background:#2563eb;color:white;border-color:#2563eb}
+.markdown-body{font-size:14px;line-height:1.6;color:#374151}
+.markdown-body h1{font-size:22px;margin:16px 0 8px;color:#111827}
+.markdown-body h2{font-size:18px;margin:14px 0 6px;color:#1f2937;border-bottom:1px solid #e5e7eb;padding-bottom:4px}
+.markdown-body h3{font-size:15px;margin:12px 0 4px;color:#374151}
+.markdown-body table{width:100%;border-collapse:collapse;margin:10px 0}
+.markdown-body th,.markdown-body td{border:1px solid #e5e7eb;padding:6px 10px;font-size:13px}
+.markdown-body th{background:#f9fafb;font-weight:600}
+.markdown-body code{background:#f3f4f6;padding:1px 4px;border-radius:3px;font-size:12px;font-family:monospace}
+.markdown-body pre{background:#1f2937;color:#f9fafb;padding:12px;border-radius:6px;overflow-x:auto;margin:8px 0}
+.markdown-body ul,.markdown-body ol{padding-left:20px;margin:6px 0}
+.markdown-body li{margin:2px 0}
+.badge-mandatory{background:#dc2626;color:white;padding:2px 8px;border-radius:4px;font-size:11px}
+.badge-optional{background:#f59e0b;color:white;padding:2px 8px;border-radius:4px;font-size:11px}
+.badge-potential{background:#6b7280;color:white;padding:2px 8px;border-radius:4px;font-size:11px}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Application Assessment Report</h1>
+  <p>ContosoUniversity &bull; ASP.NET MVC 5 / .NET Framework 4.8 &bull; Generated 2026-08-06</p>
+</div>
+<div class="container">
+
+<div class="cards">
+  <div class="card"><h3>Total Issues</h3><div class="val">18</div><div class="sub">Modernization incidents</div></div>
+  <div class="card"><h3>Mandatory</h3><div class="val" style="color:#dc2626">4</div><div class="sub">Must fix for migration</div></div>
+  <div class="card"><h3>Recommended</h3><div class="val" style="color:#f59e0b">9</div><div class="sub">Should fix</div></div>
+  <div class="card"><h3>Optional</h3><div class="val" style="color:#3b82f6">5</div><div class="sub">Consider fixing</div></div>
+  <div class="card"><h3>Security Findings</h3><div class="val" style="color:#7c3aed">8</div><div class="sub">CVE + CWE</div></div>
+</div>
+
+<div class="section">
+  <h2>Issue Summary</h2>
+  <div class="charts">
+    <div>
+      <p style="font-size:13px;color:#6b7280;margin-bottom:8px">Modernization Issues</p>
+      <svg width="140" height="140"><path d="M 70 70 L 70.0 10.0 A 60 60 0 0 1 129.1 59.6 Z" fill="#dc2626"/><path d="M 70 70 L 129.1 59.6 A 60 60 0 0 1 10.9 80.4 Z" fill="#f59e0b"/><path d="M 70 70 L 10.9 80.4 A 60 60 0 0 1 70.0 10.0 Z" fill="#3b82f6"/><circle cx="70" cy="70" r="52" fill="white"/><text x="70" y="76" text-anchor="middle" font-size="20" font-weight="bold" fill="#1f2937">18</text></svg>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#dc2626"></div><span>Mandatory (4)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div><span>Recommended (9)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div><span>Optional (5)</span></div>
+    </div>
+    <div style="margin-left:40px">
+      <p style="font-size:13px;color:#6b7280;margin-bottom:8px">Security Findings</p>
+      <svg width="140" height="140"><path d="M 70 70 L 70.0 10.0 A 60 60 0 0 1 130.0 70.0 Z" fill="#dc2626"/><path d="M 70 70 L 130.0 70.0 A 60 60 0 0 1 27.6 112.4 Z" fill="#f59e0b"/><path d="M 70 70 L 27.6 112.4 A 60 60 0 0 1 70.0 10.0 Z" fill="#6b7280"/><circle cx="70" cy="70" r="52" fill="white"/><text x="70" y="76" text-anchor="middle" font-size="20" font-weight="bold" fill="#1f2937">8</text></svg>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#dc2626"></div><span>Mandatory (2)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div><span>Optional (3)</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#6b7280"></div><span>Potential (3)</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Modernization Issues (18)</h2>
+  <table>
+    <thead><tr><th>Category</th><th>Title</th><th>ID</th><th></th></tr></thead>
+    <tbody>
+<tr onclick="toggle(0)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#dc2626;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Mandatory</span></td>
+  <td style="padding:10px 8px;font-weight:500">System.Messaging (MSMQ) is not supported on .NET Core / .NET 5+</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA001</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-0" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The application uses System.Messaging for MSMQ-based notification queuing. System.Messaging is a Windows-only, .NET Framework library that is not available in .NET Core or .NET 5+.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> Replace MSMQ with a cloud-native messaging service such as Azure Service Bus, Azure Queue Storage, or RabbitMQ via the MassTransit or NServiceBus abstraction libraries.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>System.Messaging.MessageQueue -> Azure.Messaging.ServiceBus.ServiceBusClient</code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>Services/NotificationService.cs</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(1)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#dc2626;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Mandatory</span></td>
+  <td style="padding:10px 8px;font-weight:500">System.Web.* namespace is not available in .NET Core / .NET 5+</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA002</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-1" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The project heavily depends on System.Web.Mvc, System.Web.Optimization, System.Web.Routing and other System.Web types which do not exist in .NET Core.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> Migrate to ASP.NET Core MVC. Replace System.Web.Mvc.Controller with Microsoft.AspNetCore.Mvc.Controller, update routing to attribute-based or endpoint routing, replace BundleConfig with Bundler & Minifier or Webpack.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>System.Web.Mvc.Controller -> Microsoft.AspNetCore.Mvc.Controller</code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>Global.asax.cs</code></li><li><code>App_Start/RouteConfig.cs</code></li><li><code>App_Start/BundleConfig.cs</code></li><li><code>App_Start/FilterConfig.cs</code></li><li><code>Controllers/BaseController.cs</code></li><li><code>Controllers/StudentsController.cs</code></li><li><code>Controllers/CoursesController.cs</code></li><li><code>Controllers/DepartmentsController.cs</code></li><li><code>Controllers/InstructorsController.cs</code></li><li><code>Controllers/NotificationsController.cs</code></li><li><code>Controllers/HomeController.cs</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(2)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#dc2626;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Mandatory</span></td>
+  <td style="padding:10px 8px;font-weight:500">ConfigurationManager is not the recommended configuration approach in .NET Core</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA003</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-2" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">System.Configuration.ConfigurationManager is used to read connection strings and app settings from Web.config. In .NET Core, Web.config is not the primary configuration mechanism.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> Replace ConfigurationManager with Microsoft.Extensions.Configuration (IConfiguration) and use appsettings.json. Inject IConfiguration via dependency injection.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>System.Configuration.ConfigurationManager -> Microsoft.Extensions.Configuration.IConfiguration</code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>Services/NotificationService.cs</code></li><li><code>Global.asax.cs</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(3)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#dc2626;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Mandatory</span></td>
+  <td style="padding:10px 8px;font-weight:500">Global.asax / HttpApplication startup pattern not supported in .NET Core</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA004</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-3" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The application relies on Global.asax and HttpApplication lifecycle for application startup and initialization. .NET Core uses the Program.cs / Startup.cs (or top-level statements) model.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> Migrate startup code to Program.cs using the WebApplication builder pattern. Move database initialization to IHostedService or application startup.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>HttpApplication.Application_Start -> WebApplication.CreateBuilder / app.Run()</code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>Global.asax.cs</code></li><li><code>Global.asax</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(4)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#f59e0b;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Recommended</span></td>
+  <td style="padding:10px 8px;font-weight:500">Entity Framework Core 3.1 is end-of-life; upgrade to EF Core 8+</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA005</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-4" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The project uses EF Core 3.1.32 which reached end-of-life in December 2022. This version does not receive security patches.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> Upgrade to EF Core 8.x (for .NET 8) or EF Core 9.x (for .NET 9+). Review breaking changes in the EF Core migration guide.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>Microsoft.EntityFrameworkCore 3.1.x -> Microsoft.EntityFrameworkCore 8.x</code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>Data/SchoolContext.cs</code></li><li><code>packages.config</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(5)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#f59e0b;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Recommended</span></td>
+  <td style="padding:10px 8px;font-weight:500">Web.config should be replaced with appsettings.json</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA006</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-5" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">Connection strings and application settings stored in Web.config are .NET Framework / IIS specific. Modern .NET applications use appsettings.json with optional environment-specific overrides.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> Migrate connection strings and appSettings keys to appsettings.json. Use environment variables or Azure App Configuration for environment-specific settings.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>Web.config connectionStrings/appSettings -> appsettings.json</code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>Web.config</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(6)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#f59e0b;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Recommended</span></td>
+  <td style="padding:10px 8px;font-weight:500">Manual dependency instantiation; no dependency injection container</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA007</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-6" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The application manually instantiates SchoolContext and NotificationService in BaseController constructors rather than using a DI container.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> Register services in Program.cs using builder.Services. Inject IDbContextFactory<SchoolContext> or SchoolContext directly through controller constructors. Register NotificationService as a scoped or singleton service.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>Manual new() instantiation -> IServiceProvider / constructor injection</code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>Controllers/BaseController.cs</code></li><li><code>Data/SchoolContextFactory.cs</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(7)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#f59e0b;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Recommended</span></td>
+  <td style="padding:10px 8px;font-weight:500">SQL Server LocalDB used for development - should use a configurable connection</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA008</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-7" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The connection string points to SQL Server LocalDB which is a developer tool and not suitable for cloud or container deployments.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> Use environment variables or Key Vault references for database connection strings. For cloud deployment target Azure SQL Database or Azure SQL Managed Instance.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>LocalDB connection string -> Environment variable / Azure Key Vault reference</code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>Web.config</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(8)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#3b82f6;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Optional</span></td>
+  <td style="padding:10px 8px;font-weight:500">CSRF protection uses legacy AntiForgeryToken pattern</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA009</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-8" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The application uses Html.AntiForgeryToken() and [ValidateAntiForgeryToken] which are ASP.NET MVC 5 patterns. ASP.NET Core MVC uses IAntiforgery service and [AutoValidateAntiforgeryToken].</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> After migration to ASP.NET Core, use the built-in antiforgery service. Consider using [AutoValidateAntiforgeryToken] at the application level.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>Html.AntiForgeryToken() -> IAntiforgery / [AutoValidateAntiforgeryToken]</code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>Controllers/StudentsController.cs</code></li><li><code>Controllers/CoursesController.cs</code></li><li><code>Controllers/DepartmentsController.cs</code></li><li><code>Controllers/InstructorsController.cs</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(9)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#3b82f6;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Optional</span></td>
+  <td style="padding:10px 8px;font-weight:500">File upload uses HttpPostedFileBase which is not available in .NET Core</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA010</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-9" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The CoursesController uses HttpPostedFileBase for file uploads, which is a System.Web type.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> Replace HttpPostedFileBase with IFormFile from Microsoft.AspNetCore.Http.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>System.Web.HttpPostedFileBase -> Microsoft.AspNetCore.Http.IFormFile</code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>Controllers/CoursesController.cs</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(10)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#dc2626;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Mandatory</span></td>
+  <td style="padding:10px 8px;font-weight:500">packages.config NuGet format must be migrated to PackageReference</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA011</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-10" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The project uses the legacy packages.config NuGet package management format. Modern .NET SDK-style projects use PackageReference in .csproj.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> Migrate from packages.config to PackageReference format using Visual Studio or the nuget migrate command. This is required before migrating to SDK-style project format.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>packages.config -> PackageReference in .csproj</code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>packages.config</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(11)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#dc2626;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Mandatory</span></td>
+  <td style="padding:10px 8px;font-weight:500">Non-SDK project format (.csproj) must be converted to SDK-style</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA012</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-11" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The project uses the old .NET Framework MSBuild project format which is not compatible with .NET 5+ SDK-style projects.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> Convert to SDK-style project format by rewriting the .csproj file with <Project Sdk="Microsoft.NET.Sdk.Web">. Use the Upgrade Assistant tool for automated conversion.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>Old MSBuild format -> SDK-style <Project Sdk="Microsoft.NET.Sdk.Web"></code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>ContosoUniversity.csproj</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(12)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#f59e0b;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Recommended</span></td>
+  <td style="padding:10px 8px;font-weight:500">Newtonsoft.Json should be replaced with System.Text.Json for new .NET targets</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA013</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-12" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The project uses Newtonsoft.Json 13.x. While this library still works in .NET Core, the built-in System.Text.Json is generally preferred for new development in .NET 5+.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> Consider replacing Newtonsoft.Json with System.Text.Json where possible, particularly for simple serialization scenarios. Retain Newtonsoft.Json where complex serialization is needed.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>Newtonsoft.Json.JsonConvert -> System.Text.Json.JsonSerializer</code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>Services/NotificationService.cs</code></li><li><code>packages.config</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(13)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#3b82f6;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Optional</span></td>
+  <td style="padding:10px 8px;font-weight:500">Razor views (.cshtml) need minor syntax updates for ASP.NET Core</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA014</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-13" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">Existing CSHTML views use ASP.NET MVC 5 HTML helpers (Html.BeginForm, Html.TextBoxFor, etc.). ASP.NET Core Razor uses Tag Helpers as the preferred approach.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> Consider migrating HTML helpers to Tag Helpers (asp-action, asp-controller, asp-for attributes) for better readability. HTML helpers still work in ASP.NET Core.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>Html.BeginForm / Html.TextBoxFor -> Tag Helpers (asp-action, asp-for)</code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>Views/Students/Create.cshtml</code></li><li><code>Views/Students/Edit.cshtml</code></li><li><code>Views/Courses/Create.cshtml</code></li><li><code>Views/Departments/Create.cshtml</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(14)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#f59e0b;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Recommended</span></td>
+  <td style="padding:10px 8px;font-weight:500">Logging uses System.Diagnostics.Debug.WriteLine instead of ILogger</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA015</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-14" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The application uses System.Diagnostics.Debug.WriteLine and a custom LoggingService instead of the .NET standard ILogger<T> abstraction.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> Replace with Microsoft.Extensions.Logging.ILogger<T>. This provides structured logging, multiple sinks (console, Application Insights, etc.), and configuration-based log levels.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>System.Diagnostics.Debug.WriteLine -> Microsoft.Extensions.Logging.ILogger<T></code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>Services/LoggingService.cs</code></li><li><code>Controllers/BaseController.cs</code></li><li><code>Services/NotificationService.cs</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(15)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#3b82f6;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Optional</span></td>
+  <td style="padding:10px 8px;font-weight:500">No authentication or authorization implemented</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA016</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-15" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The application has no authentication or authorization. Controllers and actions are all publicly accessible.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> For production cloud deployment, add ASP.NET Core Identity, Azure AD / Entra ID authentication, or another identity provider. Use [Authorize] attributes to protect sensitive operations.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>No auth -> Microsoft.AspNetCore.Authentication / [Authorize] attribute</code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>Controllers/BaseController.cs</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(16)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#f59e0b;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Recommended</span></td>
+  <td style="padding:10px 8px;font-weight:500">File uploads stored on local filesystem; not suitable for cloud scale-out</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA017</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-16" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The CoursesController saves uploaded files to the server local filesystem (~/Uploads). This pattern does not work in horizontally scaled or ephemeral cloud environments.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> Store uploaded files in Azure Blob Storage or another cloud object store. Use the Azure.Storage.Blobs SDK and return a URL/reference rather than a file path.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>Server.MapPath + File.Save -> Azure.Storage.Blobs.BlobContainerClient</code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>Controllers/CoursesController.cs</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle(17)" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#f59e0b;color:white;padding:2px 8px;border-radius:4px;font-size:12px">Recommended</span></td>
+  <td style="padding:10px 8px;font-weight:500">Table-per-Hierarchy (TPH) inheritance for Person entity needs verification with newer EF Core</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">UA018</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-17" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The SchoolContext configures TPH inheritance for the Person entity (Student/Instructor). EF Core 7+ changed how TPH discriminators work by default.</p>
+    <p style="margin:0 0 4px"><strong>Recommendation:</strong> After upgrading to EF Core 7+, verify TPH behavior still works as expected. Consider explicit discriminator column type configuration.</p>
+    <p style="margin:4px 0"><strong>API Change:</strong> <code>EF Core 3.1 TPH -> EF Core 7+ TPH (verify discriminator configuration)</code></p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>Data/SchoolContext.cs</code></li></ul>
+  </td>
+</tr></tbody>
+  </table>
+</div>
+
+<div class="section">
+  <h2>Security Findings (8)</h2>
+  <table>
+    <thead><tr><th>Severity</th><th>Finding</th><th>Category</th><th></th></tr></thead>
+    <tbody>
+<tr onclick="toggle('s0')" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#dc2626;color:white;padding:2px 8px;border-radius:4px;font-size:12px">mandatory</span></td>
+  <td style="padding:10px 8px;font-weight:500">CVE-2024-0056 – Microsoft.Data.SqlClient and System.Data.SqlClient vulnerable to SQL Data Provider Security Feature Bypass</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">CVE</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-s0" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">[CVE-2024-0056](https://github.com/advisories/GHSA-98g6-xh36-x2p7): Microsoft.Data.SqlClient and System.Data.SqlClient vulnerable to SQL Data Provider Security Feature Bypass
+
+Severity: HIGH
+
+Affected dependencies:
+  - Microsoft.Data.SqlClient@2.1.4 (declared at packages.config) — affected range: < 2.1.7
+
+Recommended fix:
+  - Upgrade Microsoft.Data.SqlClient to 2.1.7 or later</p>
+    <p style="margin:0 0 8px"><strong>Details:</strong> [CVE-2024-0056](https://github.com/advisories/GHSA-98g6-xh36-x2p7): Microsoft.Data.SqlClient and System.Data.SqlClient vulnerable to SQL Data Provider Security Feature Bypass<br><br>Severity: HIGH<br><br>Affected dependencies:<br>  - Microsoft.Data.SqlClient@2.1.4 (declared at packages.config) — affected range: < 2.1.7<br><br>Recommended fix:<br>  - Upgrade Microsoft.Data.SqlClient to 2.1.7 or later</p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>ContosoUniversity/packages.config</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle('s1')" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#f59e0b;color:white;padding:2px 8px;border-radius:4px;font-size:12px">optional</span></td>
+  <td style="padding:10px 8px;font-weight:500">CWE-477 – Use of Obsolete Function</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">Code Quality</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-s1" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The code uses deprecated or obsolete functions, which suggests that the code has not been actively reviewed or maintained.</p>
+    <p style="margin:0 0 8px"><strong>Details:</strong> NotificationService uses System.Messaging.MessageQueue, which is a Windows-only legacy API that is not supported in .NET Core/.NET 5+ and has been superseded by modern cloud messaging services. The class uses MessageQueue.Create(), MessageQueue.Exists(), _queue.Send(), _queue.Receive(), and XmlMessageFormatter — all of which are part of the obsolete System.Messaging namespace. This API has no cross-platform or cloud-portable equivalent and is explicitly identified as a migration blocker by Microsoft's modernization tooling.</p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>ContosoUniversity/Services/NotificationService.cs</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle('s2')" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#6b7280;color:white;padding:2px 8px;border-radius:4px;font-size:12px">potential</span></td>
+  <td style="padding:10px 8px;font-weight:500">CWE-772 – Missing Release of Resource after Effective Lifetime</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">Code Quality</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-s2" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The product does not release a resource after its effective lifetime has ended, i.e., after the resource is no longer needed.</p>
+    <p style="margin:0 0 8px"><strong>Details:</strong> InstructorsController.Dispose(bool disposing) (line ~252) calls `db.Dispose()` directly, and then calls `base.Dispose(disposing)`. BaseController.Dispose(bool disposing) also calls `db?.Dispose()` on the same instance. This results in a double-dispose of the SchoolContext DbContext object. While EF Core's DbContext.Dispose() is idempotent (safe to call multiple times without throwing), calling Dispose() on an already-disposed context leaves it in a permanently unusable state, and any subsequent operation on the context after the first Dispose() call would throw ObjectDisposedException. Additionally, DepartmentsController.Dispose() has the same double-dispose pattern at line ~167.</p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>ContosoUniversity/Controllers/InstructorsController.cs</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle('s3')" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#6b7280;color:white;padding:2px 8px;border-radius:4px;font-size:12px">potential</span></td>
+  <td style="padding:10px 8px;font-weight:500">CWE-1057 – Data Access Operations Outside of Expected Data Manager Component</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">Code Quality</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-s3" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The product uses a dedicated, central data manager component as required by design, but it contains code that performs data-access operations that do not use this data manager.</p>
+    <p style="margin:0 0 8px"><strong>Details:</strong> All MVC controllers directly access the SchoolContext DbContext instance (db) inherited from BaseController, bypassing any service or repository layer. EF Core DbContext is intended to be the data access abstraction, but accessing it directly from controllers couples the presentation layer to the data access layer. For example, StudentsController.Index() executes LINQ queries directly against db.Students, CoursesController.Create() calls db.Courses.Add() and db.SaveChanges() directly, and InstructorsController.Edit() calls db.Entry().State = EntityState.Deleted directly. This violates separation of concerns and makes it impossible to unit test controllers without a real database connection.</p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>ContosoUniversity/Controllers/StudentsController.cs</code></li><li><code>ContosoUniversity/Controllers/CoursesController.cs</code></li><li><code>ContosoUniversity/Controllers/DepartmentsController.cs</code></li><li><code>ContosoUniversity/Controllers/InstructorsController.cs</code></li><li><code>ContosoUniversity/Controllers/NotificationsController.cs</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle('s4')" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#f59e0b;color:white;padding:2px 8px;border-radius:4px;font-size:12px">optional</span></td>
+  <td style="padding:10px 8px;font-weight:500">CWE-732 – Incorrect Permission Assignment for Critical Resource</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">Credentials & Secrets</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-s4" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The product specifies permissions for a security-critical resource in a way that allows that resource to be read or modified by unintended actors.</p>
+    <p style="margin:0 0 8px"><strong>Details:</strong> NotificationService constructor (line 23) grants 'Everyone' full control over the MSMQ notification queue when it is created: `_queue.SetPermissions("Everyone", MessageQueueAccessRights.FullControl)`. This allows any user or process on the Windows machine — including unauthenticated network users if the queue is remotely accessible — to read, write, delete, and administer the message queue. An attacker could inject arbitrary notification messages, drain the queue, or cause denial-of-service by flooding it. The queue should be restricted to the application's service account identity.</p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>ContosoUniversity/Services/NotificationService.cs</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle('s5')" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#6b7280;color:white;padding:2px 8px;border-radius:4px;font-size:12px">potential</span></td>
+  <td style="padding:10px 8px;font-weight:500">CWE-778 – Insufficient Logging</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">Credentials & Secrets</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-s5" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">When a security-critical event occurs, the product either does not record the event or omits important details about the event when logging it.</p>
+    <p style="margin:0 0 8px"><strong>Details:</strong> Security-relevant events are not logged to a persistent, observable log store: (1) BaseController.SendEntityNotification() catches all exceptions from notification delivery and silently swallows them with only a Debug.WriteLine() call — these failures are invisible in production environments where the debugger is not attached; (2) NotificationService.SendNotification() and ReceiveNotification() catch exceptions and log only to Debug.WriteLine(), which is not written to any log file or monitoring system in production; (3) There is no logging of entity create/update/delete operations, authentication events, authorization decisions, or file upload events with user identity, timestamp, or IP address. The application has no structured logging framework (Serilog, NLog, Microsoft.Extensions.Logging providers) configured.</p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>ContosoUniversity/Controllers/BaseController.cs</code></li><li><code>ContosoUniversity/Services/NotificationService.cs</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle('s6')" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#f59e0b;color:white;padding:2px 8px;border-radius:4px;font-size:12px">optional</span></td>
+  <td style="padding:10px 8px;font-weight:500">CWE-22 – Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">File & Path Security</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-s6" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The product uses external input to construct a pathname that is intended to identify a file or directory that is located underneath a restricted parent directory, but the product does not properly neutralize special elements within the pathname that can cause the pathname to resolve to a location that is outside of the restricted directory.</p>
+    <p style="margin:0 0 8px"><strong>Details:</strong> In CoursesController.DeleteConfirmed (line ~229), the file path is reconstructed using `Server.MapPath(course.TeachingMaterialImagePath)` where `TeachingMaterialImagePath` is a value read from the database — but during the Create/Edit POST, the `[Bind]` attribute includes `TeachingMaterialImagePath` in the bound field list, meaning an attacker could submit a crafted value such as `~/../../sensitive/file` in the POST body, which could then be persisted to the database and subsequently used in `Server.MapPath()` to resolve a path outside the web root. There is no validation or sanitization of the `TeachingMaterialImagePath` field value before it is stored or used in file system operations.</p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>ContosoUniversity/Controllers/CoursesController.cs</code></li></ul>
+  </td>
+</tr>
+<tr onclick="toggle('s7')" style="cursor:pointer;border-bottom:1px solid #e5e7eb">
+  <td style="padding:10px 8px"><span style="background:#dc2626;color:white;padding:2px 8px;border-radius:4px;font-size:12px">mandatory</span></td>
+  <td style="padding:10px 8px;font-weight:500">CWE-434 – Unrestricted Upload of File with Dangerous Type</td>
+  <td style="padding:10px 8px;color:#6b7280;font-size:13px">File & Path Security</td>
+  <td style="padding:10px 8px;text-align:center">▼</td>
+</tr>
+<tr id="detail-s7" style="display:none;background:#f9fafb">
+  <td colspan="4" style="padding:12px 16px">
+    <p style="margin:0 0 8px">The product allows the upload or transfer of dangerous file types that are automatically processed within its environment.</p>
+    <p style="margin:0 0 8px"><strong>Details:</strong> CoursesController.Create (line ~55) and CoursesController.Edit (line ~128) accept file uploads and validate the file type using only the file extension (`Path.GetExtension(teachingMaterialImage.FileName).ToLower()`). This check can be bypassed: (1) the MIME type / Content-Type header is not verified against the actual file content, allowing an attacker to upload a file with a valid image extension (e.g., `.jpg`) that contains executable script content; (2) on some IIS configurations, double extensions (e.g., `shell.asp;.jpg`) can bypass extension-only checks. The allowed extension list (`jpg`, `jpeg`, `png`, `gif`, `bmp`) is client-supplied filename-based only — no magic byte / file signature validation is performed.</p>
+    <p style="margin:8px 0 4px"><strong>Affected Files:</strong></p><ul style="margin:0;padding-left:20px"><li><code>ContosoUniversity/Controllers/CoursesController.cs</code></li></ul>
+  </td>
+</tr></tbody>
+  </table>
+</div>
+
+<div class="section">
+  <h2>Architecture & Analysis</h2>
+  <div class="tab-bar"><button class="tab-btn" onclick="showTab('api_service_contracts_md')" id="btn-api_service_contracts_md">Api Service Contracts</button>
+<button class="tab-btn" onclick="showTab('architecture_diagram_md')" id="btn-architecture_diagram_md">Architecture Diagram</button>
+<button class="tab-btn" onclick="showTab('assessment_overview_md')" id="btn-assessment_overview_md">Assessment Overview</button>
+<button class="tab-btn" onclick="showTab('business_workflows_md')" id="btn-business_workflows_md">Business Workflows</button>
+<button class="tab-btn" onclick="showTab('configuration_inventory_md')" id="btn-configuration_inventory_md">Configuration Inventory</button>
+<button class="tab-btn" onclick="showTab('data_architecture_md')" id="btn-data_architecture_md">Data Architecture</button>
+<button class="tab-btn" onclick="showTab('dependency_map_md')" id="btn-dependency_map_md">Dependency Map</button>
+</div>
+  <div id="tab-api_service_contracts_md" class="tab-pane" style="display:none"><div class="markdown-body" id="md-api_service_contracts_md" data-raw="# API &amp; Service Communication Contracts
+
+ContosoUniversity exposes a server-rendered web interface via 38 ASP.NET MVC 5 action endpoints across 6 controllers; there is no REST API or service-to-service HTTP communication — all interactions use synchronous browser HTTP requests with HTML responses and a single MSMQ queue for async notifications.
+
+## Service Catalog
+
+| Service | Port | Category | Purpose |
+|---|---|---|---|
+| ContosoUniversity Web | 80 / 443 (IIS) | Business | Single ASP.NET MVC 5 web application serving all university management functions |
+
+&gt; Note: This is a single-process monolith with no microservices, containers, or separate deployable units.
+
+## API Endpoints Inventory
+
+| Controller | Method | Path | Request Parameters | Response |
+|---|---|---|---|---|
+| HomeController | GET | / (Home/Index) | — | HTML — enrollment statistics page |
+| HomeController | GET | /Home/About | — | HTML — enrollment date summary |
+| HomeController | GET | /Home/Contact | — | HTML — contact page |
+| HomeController | GET | /Home/Error | — | HTML — error view |
+| HomeController | GET | /Home/Unauthorized | — | HTML — unauthorized view |
+| StudentsController | GET | /Students | sortOrder, currentFilter, searchString, page (query) | HTML — paginated student list |
+| StudentsController | GET | /Students/Details/{id} | id (path) | HTML — student detail view |
+| StudentsController | GET | /Students/Create | — | HTML — create form |
+| StudentsController | POST | /Students/Create | Student (form body: LastName, FirstMidName, EnrollmentDate) | Redirect on success / HTML on validation error |
+| StudentsController | GET | /Students/Edit/{id} | id (path) | HTML — edit form |
+| StudentsController | POST | /Students/Edit/{id} | Student (form body: ID, LastName, FirstMidName, EnrollmentDate) | Redirect on success / HTML on error |
+| StudentsController | GET | /Students/Delete/{id} | id (path) | HTML — delete confirmation |
+| StudentsController | POST | /Students/Delete/{id} | id (form body) | Redirect on success |
+| CoursesController | GET | /Courses | — | HTML — course list |
+| CoursesController | GET | /Courses/Details/{id} | id (path) | HTML — course detail view |
+| CoursesController | GET | /Courses/Create | — | HTML — create form |
+| CoursesController | POST | /Courses/Create | Course + teachingMaterialImage (multipart/form-data) | Redirect on success / HTML on error |
+| CoursesController | GET | /Courses/Edit/{id} | id (path) | HTML — edit form |
+| CoursesController | POST | /Courses/Edit/{id} | Course + teachingMaterialImage (multipart/form-data) | Redirect on success / HTML on error |
+| CoursesController | GET | /Courses/Delete/{id} | id (path) | HTML — delete confirmation |
+| CoursesController | POST | /Courses/Delete/{id} | id (form body) | Redirect on success |
+| DepartmentsController | GET | /Departments | — | HTML — department list |
+| DepartmentsController | GET | /Departments/Details/{id} | id (path) | HTML — department detail view |
+| DepartmentsController | GET | /Departments/Create | — | HTML — create form |
+| DepartmentsController | POST | /Departments/Create | Department (form body: Name, Budget, StartDate, InstructorID) | Redirect on success / HTML on error |
+| DepartmentsController | GET | /Departments/Edit/{id} | id (path) | HTML — edit form |
+| DepartmentsController | POST | /Departments/Edit/{id} | Department (form body: DepartmentID, Name, Budget, StartDate, InstructorID, RowVersion) | Redirect on success / HTML on error |
+| DepartmentsController | GET | /Departments/Delete/{id} | id (path) | HTML — delete confirmation |
+| DepartmentsController | POST | /Departments/Delete/{id} | id (form body) | Redirect on success |
+| InstructorsController | GET | /Instructors | id, courseID (query — optional selection) | HTML — instructor list with optional course/enrollment detail |
+| InstructorsController | GET | /Instructors/Details/{id} | id (path) | HTML — instructor detail |
+| InstructorsController | GET | /Instructors/Create | — | HTML — create form |
+| InstructorsController | POST | /Instructors/Create | Instructor + selectedCourses[] (form body) | Redirect on success / HTML on error |
+| InstructorsController | GET | /Instructors/Edit/{id} | id (path) | HTML — edit form |
+| InstructorsController | POST | /Instructors/Edit/{id} | id + selectedCourses[] (form body) | Redirect on success / HTML on error |
+| InstructorsController | GET | /Instructors/Delete/{id} | id (path) | HTML — delete confirmation |
+| InstructorsController | POST | /Instructors/Delete/{id} | id (form body) | Redirect on success |
+| NotificationsController | GET | /Notifications | — | HTML — notification list |
+| NotificationsController | POST | /Notifications/MarkAllRead | — | Redirect |
+
+## Management &amp; Observability Endpoints
+
+| Endpoint | Description |
+|---|---|
+| None configured | No health check, metrics, or Swagger/OpenAPI endpoints are present |
+
+&gt; The application has no `/health`, `/metrics`, `/swagger`, or actuator-equivalent endpoints. For cloud/container deployments, health check endpoints must be added before deploying to Azure App Service, AKS, or any orchestrated environment.
+
+## DTOs &amp; Contracts
+
+The application does not use separate DTO classes — domain entity classes are used directly as MVC model binding targets and view models:
+
+| Class | Role | Notes |
+|---|---|---|
+| `Student` | Form binding target (POST Create/Edit), View model | Domain entity used directly; no dedicated request/response DTO |
+| `Course` | Form binding target (POST Create/Edit), View model | Includes `TeachingMaterialImagePath` for file upload path storage |
+| `Department` | Form binding target (POST Create/Edit), View model | Includes `RowVersion` byte array for optimistic concurrency |
+| `Instructor` | Form binding target (POST Create/Edit), View model | Bound with `selectedCourses[]` string array for course assignments |
+| `Notification` | Read view model | Serialised as JSON for MSMQ transmission via Newtonsoft.Json |
+| `InstructorIndexData` | View model (GET Instructors/Index) | Aggregates Instructors, Courses, and Enrollments for index page |
+| `AssignedCourseData` | View model (GET Instructors/Edit) | Projects course assignment checkboxes for edit form |
+| `EnrollmentDateGroup` | View model (GET Home/About) | Groups enrollment counts by date for statistics page |
+| `PaginatedList&lt;T&gt;` | Pagination wrapper | Generic; wraps IQueryable results with page metadata for Students/Index |
+
+No OpenAPI/Swagger specification, protobuf schemas, or GraphQL definitions exist. Serialization uses **Newtonsoft.Json 13.0.3** for MSMQ message payloads only; MVC model binding and Razor views handle all other data exchange. `[Bind(Include = "...")]` attribute lists provide explicit allow-list binding on POST actions.
+
+## Communication Patterns
+
+**Synchronous (browser ↔ server):** All 38 endpoints follow a synchronous request-response pattern. The browser sends an HTTP GET or POST; the MVC controller queries or mutates via Entity Framework Core synchronously, then returns a full HTML page (Razor view) or an HTTP redirect.
+
+**Asynchronous (CRUD → MSMQ):** After each successful create, update, or delete operation, `BaseController.SendEntityNotification()` posts a JSON-serialised `Notification` object to a private MSMQ queue (`.\Private$\ContosoUniversityNotifications`). This call is fire-and-forget with a try/catch that swallows exceptions silently to avoid breaking the main operation. There is no consumer, retry logic, dead-letter queue, or message ordering guarantee visible in the codebase.
+
+**Resilience patterns:** None implemented. There are no circuit breakers, retry policies, timeouts, or bulkhead patterns. Database failures will propagate as unhandled exceptions.
+
+**Service discovery:** Not applicable — single monolith with one SQL Server connection string hardcoded in Web.config.
+
+**API gateway:** Not present.
+
+**Security posture:** No authentication, no authorization, and no HTTPS enforcement are configured. All 38 endpoints are publicly accessible with no authorization checks. The `[ValidateAntiForgeryToken]` attribute is applied on all mutating POST actions (Create, Edit, Delete) providing CSRF protection, but there is no identity or role-based access control. Transport security (HTTPS/TLS) must be enforced at the IIS or reverse-proxy level as no application-level redirect is configured.
+
+## Service Technology Matrix
+
+| Capability | ContosoUniversity Web |
+|---|---|
+| Web Framework | ASP.NET MVC 5 (System.Web) |
+| Data Access | Entity Framework Core 3.1 + SQL Server |
+| Service Discovery | None |
+| API Gateway | None |
+| Health Checks | None |
+| Caching | None (no caching layer implemented) |
+| Metrics / Observability | None |
+| Authentication | None |
+| Messaging | MSMQ (System.Messaging) — send only |
+
+## Service Communication Sequence
+
+```mermaid
+sequenceDiagram
+    participant Browser as "Web Browser"
+    participant Ctrl as "MVC Controller"
+    participant EF as "EF Core (SchoolContext)"
+    participant DB as "SQL Server"
+    participant NotiSvc as "NotificationService"
+    participant MSMQ as "MSMQ Queue"
+
+    Browser-&gt;&gt;Ctrl: GET /Students (sortOrder, page, search)
+    Ctrl-&gt;&gt;EF: db.Students.Where(...).OrderBy(...) 
+    EF-&gt;&gt;DB: SELECT * FROM Person WHERE Discriminator=Student
+    DB--&gt;&gt;EF: Student rows
+    EF--&gt;&gt;Ctrl: IQueryable Students
+    Ctrl-&gt;&gt;Ctrl: PaginatedList.Create(students, page, 10)
+    Ctrl--&gt;&gt;Browser: 200 HTML (paginated student list)
+
+    Browser-&gt;&gt;Ctrl: POST /Students/Create (form data)
+    Ctrl-&gt;&gt;Ctrl: ModelState.IsValid check
+    alt Validation passes
+        Ctrl-&gt;&gt;EF: db.Students.Add(student); db.SaveChanges()
+        EF-&gt;&gt;DB: INSERT INTO Person (...)
+        DB--&gt;&gt;EF: Rows affected
+        EF--&gt;&gt;Ctrl: Success
+        Ctrl-&gt;&gt;NotiSvc: SendNotification(Student, id, CREATE)
+        NotiSvc-&gt;&gt;MSMQ: Send JSON message
+        MSMQ--&gt;&gt;NotiSvc: Queued
+        Ctrl--&gt;&gt;Browser: 302 Redirect /Students
+    else Validation fails
+        Ctrl--&gt;&gt;Browser: 200 HTML (form with errors)
+    end
+
+    Browser-&gt;&gt;Ctrl: GET /Instructors?id=1&amp;courseID=5
+    Ctrl-&gt;&gt;EF: Include(Courses).Include(OfficeAssignment).Include(CourseAssignments)
+    EF-&gt;&gt;DB: SELECT with JOINs
+    DB--&gt;&gt;EF: Instructor + related data
+    EF--&gt;&gt;Ctrl: InstructorIndexData (Instructors, Courses, Enrollments)
+    Ctrl--&gt;&gt;Browser: 200 HTML (instructor detail + enrollment table)
+```
+"></div></div>
+<div id="tab-architecture_diagram_md" class="tab-pane" style="display:none"><div class="markdown-body" id="md-architecture_diagram_md" data-raw="# Architecture Diagram
+
+This document describes the high-level application architecture and the detailed component relationships of the ContosoUniversity ASP.NET MVC 5 web application running on .NET Framework 4.8.
+
+## Application Architecture
+
+```mermaid
+flowchart TD
+    subgraph Client["Client Layer"]
+        Browser["Web Browser"]
+    end
+    subgraph App["Application Layer - ASP.NET MVC 5 / .NET Framework 4.8"]
+        MVC["ASP.NET MVC 5 Controllers + Razor Views"]
+        Bundle["Script and Style Bundling (System.Web.Optimization)"]
+        Services["Application Services (NotificationService, LoggingService)"]
+    end
+    subgraph Data["Data Layer"]
+        EF["Entity Framework Core 3.1"]
+        DB[("SQL Server (LocalDB for dev)")]
+    end
+    subgraph Messaging["Messaging Layer"]
+        MSMQ["MSMQ (System.Messaging)"]
+    end
+    subgraph External["External / Infrastructure"]
+        FS["Local Filesystem (Uploads folder)"]
+    end
+
+    Browser --&gt;|"HTTP requests"| MVC
+    MVC --&gt;|"renders"| Bundle
+    MVC --&gt;|"calls"| Services
+    MVC --&gt;|"queries/commands"| EF
+    EF --&gt;|"SQL queries"| DB
+    Services --&gt;|"sends messages"| MSMQ
+    MVC --&gt;|"stores teaching materials"| FS
+```
+
+### Technology Stack Summary
+
+| Layer | Technology | Version | Purpose |
+|---|---|---|---|
+| Presentation | ASP.NET MVC 5 | 5.2.9 | Server-side web framework with Razor views |
+| Presentation | Razor Views (.cshtml) | 3.2.9 | HTML templating |
+| Presentation | Bootstrap | 5.3.3 | Responsive UI framework |
+| Presentation | jQuery | 3.7.1 | Client-side scripting |
+| Presentation | jQuery Validation | 1.21.0 | Client-side form validation |
+| Application | .NET Framework | 4.8 | Runtime platform |
+| Application | System.Web.Optimization | 1.1.3 | Script/CSS bundling and minification |
+| Data Access | Entity Framework Core | 3.1.32 | ORM for relational data access |
+| Data Access | Microsoft.Data.SqlClient | 2.1.4 | SQL Server connectivity |
+| Database | SQL Server / LocalDB | N/A | Relational data store |
+| Messaging | System.Messaging (MSMQ) | N/A (built-in) | Async notification queue |
+| Serialization | Newtonsoft.Json | 13.0.3 | JSON serialization |
+
+### Data Storage &amp; External Services
+
+The application uses a single SQL Server database (LocalDB for development, configurable connection string in Web.config) accessed through Entity Framework Core 3.1. A private MSMQ queue (`.\Private$\ContosoUniversityNotifications`) is used for asynchronous notification messaging — the `NotificationService` writes notifications to the queue on entity create/update/delete operations. Uploaded files (teaching material images) are stored directly on the web server's local filesystem under the `~/Uploads` directory. There are no external third-party API integrations or cloud services.
+
+### Key Architectural Decisions
+
+- **ASP.NET MVC 5 with Razor Views**: Uses a traditional server-side rendered MVC pattern; all HTML is generated on the server and returned to the browser as full pages.
+- **Entity Framework Core 3.1 on .NET Framework 4.8**: Unusual hybrid — EF Core is used instead of EF6, providing LINQ-based queries while remaining on the legacy .NET Framework runtime. Table-per-Hierarchy (TPH) inheritance is configured for the `Person` base entity (Student/Instructor discriminator).
+- **MSMQ for Notifications**: Fire-and-forget notification messages are queued via MSMQ after each CRUD operation; this is a Windows-only technology and represents a significant cloud migration blocker.
+
+## Component Relationships
+
+```mermaid
+flowchart LR
+    subgraph Presentation["Presentation Layer"]
+        HomeCtrl["HomeController"]
+        StudCtrl["StudentsController"]
+        CourseCtrl["CoursesController"]
+        DeptCtrl["DepartmentsController"]
+        InstrCtrl["InstructorsController"]
+        NotiCtrl["NotificationsController"]
+    end
+    subgraph Base["Base Infrastructure"]
+        BaseCtrl["BaseController (abstract)"]
+    end
+    subgraph BusinessSvc["Services"]
+        NotiSvc["NotificationService"]
+        LogSvc["LoggingService"]
+    end
+    subgraph DataAccess["Data Access"]
+        SchoolCtx["SchoolContext (DbContext)"]
+        CtxFactory["SchoolContextFactory"]
+    end
+    subgraph Entities["Domain Entities"]
+        Person["Person (base)"]
+        Student["Student"]
+        Instructor["Instructor"]
+        Course["Course"]
+        Dept["Department"]
+        Enrollment["Enrollment"]
+        CourseAssign["CourseAssignment"]
+        OfficeAssign["OfficeAssignment"]
+        Notification["Notification"]
+    end
+    subgraph CrossCutting["Cross-Cutting"]
+        RouteConfig["RouteConfig"]
+        BundleConfig["BundleConfig"]
+        FilterConfig["FilterConfig"]
+    end
+
+    HomeCtrl --&gt;|"inherits"| BaseCtrl
+    StudCtrl --&gt;|"inherits"| BaseCtrl
+    CourseCtrl --&gt;|"inherits"| BaseCtrl
+    DeptCtrl --&gt;|"inherits"| BaseCtrl
+    InstrCtrl --&gt;|"inherits"| BaseCtrl
+    NotiCtrl --&gt;|"inherits"| BaseCtrl
+
+    BaseCtrl --&gt;|"uses"| SchoolCtx
+    BaseCtrl --&gt;|"uses"| NotiSvc
+    BaseCtrl --&gt;|"creates via"| CtxFactory
+
+    StudCtrl --&gt;|"queries"| Student
+    CourseCtrl --&gt;|"queries"| Course
+    DeptCtrl --&gt;|"queries"| Dept
+    InstrCtrl --&gt;|"queries"| Instructor
+    NotiCtrl --&gt;|"queries"| Notification
+
+    SchoolCtx --&gt;|"maps"| Person
+    SchoolCtx --&gt;|"maps"| Course
+    SchoolCtx --&gt;|"maps"| Dept
+    SchoolCtx --&gt;|"maps"| Enrollment
+    SchoolCtx --&gt;|"maps"| CourseAssign
+    SchoolCtx --&gt;|"maps"| OfficeAssign
+    SchoolCtx --&gt;|"maps"| Notification
+
+    Person --&gt;|"parent of"| Student
+    Person --&gt;|"parent of"| Instructor
+
+    RouteConfig -.-&gt;|"configures"| Presentation
+    FilterConfig -.-&gt;|"global filters"| Presentation
+```
+
+### Component Inventory
+
+| Component | Layer | Type | Responsibility |
+|---|---|---|---|
+| HomeController | Presentation | MVC Controller | Renders home page and statistics (enrollment count by date) |
+| StudentsController | Presentation | MVC Controller | CRUD for student records with search and pagination |
+| CoursesController | Presentation | MVC Controller | CRUD for courses including teaching material file uploads |
+| DepartmentsController | Presentation | MVC Controller | CRUD for academic departments |
+| InstructorsController | Presentation | MVC Controller | CRUD for instructors with office and course assignment management |
+| NotificationsController | Presentation | MVC Controller | Displays notification log from MSMQ queue |
+| BaseController | Base Infrastructure | Abstract MVC Controller | Initialises SchoolContext and NotificationService; sends entity change notifications |
+| NotificationService | Services | Service Class | Wraps MSMQ queue operations; serialises/deserialises Notification objects as JSON |
+| LoggingService | Services | Service Class | Provides application-level logging to Debug output |
+| SchoolContext | Data Access | EF Core DbContext | Defines entity sets and model configuration; TPH for Person hierarchy |
+| SchoolContextFactory | Data Access | Factory | Creates SchoolContext with SQL Server connection string from Web.config |
+| DbInitializer | Data Access | Seeder | Seeds initial data if the database is empty |
+| Person | Domain Entities | Entity (base) | Base class for Student and Instructor with shared identity fields |
+| Student | Domain Entities | Entity | Represents a student; derived from Person via TPH |
+| Instructor | Domain Entities | Entity | Represents an instructor; derived from Person via TPH |
+| Course | Domain Entities | Entity | Academic course with department relationship and file upload path |
+| Department | Domain Entities | Entity | Academic department with administrator (Instructor) relationship |
+| Enrollment | Domain Entities | Entity | Many-to-many join between Student and Course with grade |
+| CourseAssignment | Domain Entities | Entity | Many-to-many join between Course and Instructor (composite key) |
+| OfficeAssignment | Domain Entities | Entity | One-to-one relationship between Instructor and office location |
+| Notification | Domain Entities | Entity | Notification record stored in MSMQ and optionally in DB |
+| RouteConfig | Cross-Cutting | Route Configuration | Defines conventional MVC route pattern {controller}/{action}/{id} |
+| BundleConfig | Cross-Cutting | Bundle Configuration | Defines CSS and JS bundles for Bootstrap, jQuery, validation |
+| FilterConfig | Cross-Cutting | Filter Configuration | Registers global MVC filters (HandleErrorAttribute) |
+| PaginatedList | Utility | Generic Class | Wraps IQueryable results with page-size and page-number pagination |
+"></div></div>
+<div id="tab-assessment_overview_md" class="tab-pane" style="display:none"><div class="markdown-body" id="md-assessment_overview_md" data-raw="# Assessment Overview
+
+This directory contains supplementary analysis documents generated as part of the ContosoUniversity application assessment. Each document covers a specific aspect of the application architecture, dependencies, and behaviour to support modernization planning.
+
+## Supplementary Documents
+
+| Document | Description |
+|---|---|
+| [Architecture Diagram](architecture-diagram.md) | High-level application architecture diagram (layers, data flow, technology stack) and detailed component relationship diagram (controllers, services, data access, domain entities) |
+| [Dependency Map](dependency-map.md) | Visual map of all external NuGet dependencies grouped by functional category (web frameworks, database/ORM, messaging, security, utilities), with version and compatibility risk analysis |
+| [API &amp; Service Communication Contracts](api-service-contracts.md) | Complete inventory of all 38 MVC action endpoints, communication patterns (synchronous HTTP + async MSMQ), DTOs, security posture, and a request-flow sequence diagram |
+| [Data Architecture &amp; Persistence Layer](data-architecture.md) | Database configuration, entity model ER diagram, repository query patterns, caching strategy (none), and data sensitivity/PII classification |
+| [Configuration &amp; Externalized Settings Inventory](configuration-inventory.md) | All configuration sources (Web.config), build and runtime profiles, properties inventory, secrets management assessment, framework version catalogue, and startup dependency chain |
+| [Core Business Workflows](business-workflows.md) | Domain entity descriptions, primary business workflows (student registration, instructor course assignment, concurrency management, file uploads, notification queue), and business rules &amp; validation logic |
+"></div></div>
+<div id="tab-business_workflows_md" class="tab-pane" style="display:none"><div class="markdown-body" id="md-business_workflows_md" data-raw="# Core Business Workflows
+
+ContosoUniversity is a university administration web application that allows staff to manage students, instructors, courses, departments, and course enrollments within a single integrated system.
+
+## Domain Entities
+
+| Entity | Bounded Context | Description | Key Relationships |
+|---|---|---|---|
+| Student | Academic Records | A person enrolled at the university | Has many Enrollments; inherits identity from Person |
+| Instructor | Human Resources / Academics | A teaching staff member | Has many CourseAssignments; optionally has one OfficeAssignment; may administer one Department; inherits identity from Person |
+| Person | Identity | Abstract base for Student and Instructor (TPH) | Parent of Student and Instructor |
+| Course | Curriculum | An academic course offered by a department | Belongs to one Department; has many Enrollments; assigned to many Instructors via CourseAssignment |
+| Department | Organisation | An academic department that owns courses | Has many Courses; has one administrator (Instructor) |
+| Enrollment | Academic Records | Records a student's participation in a course and their grade | Connects Student and Course; carries optional Grade |
+| CourseAssignment | Scheduling | Associates an Instructor with a Course (many-to-many) | Join entity between Instructor and Course |
+| OfficeAssignment | Facilities | Records an instructor's office location (optional) | One-to-one with Instructor |
+| Notification | Audit / Operations | Records CRUD events sent via MSMQ for audit and operational visibility | Standalone entity; created on any entity create/update/delete |
+
+## Service-to-Domain Mapping
+
+| Service | Domain Context | Owned Entities | External Dependencies |
+|---|---|---|---|
+| ContosoUniversity Web | University Administration (single bounded context) | All entities (Student, Instructor, Course, Department, Enrollment, CourseAssignment, OfficeAssignment, Notification, Person) | SQL Server (data store), MSMQ (async notifications), Local filesystem (teaching material uploads) |
+
+This is a monolithic application with a single bounded context. There is no service decomposition; all domain logic resides in the MVC controllers and is executed in the same process.
+
+## Primary Workflows
+
+### Workflow 1: Student Enrolment Registration
+
+An administrator registers a new student in the system.
+
+1. Staff navigates to `/Students/Create`.
+2. System presents a blank form with `EnrollmentDate` defaulting to today.
+3. Staff enters `LastName`, `FirstMidName`, and `EnrollmentDate`.
+4. On POST, the system validates:
+   - `LastName` and `FirstMidName` required, max 50 characters each.
+   - `EnrollmentDate` must not be `DateTime.MinValue` / default.
+   - `EnrollmentDate` must be within SQL Server range (1753-01-01 to 9999-12-31).
+   - `[Bind]` allow-list limits bound fields to prevent over-posting.
+5. If validation passes: student is saved to the database and an async CREATE notification is enqueued to MSMQ.
+6. Staff is redirected to the student list.
+7. If validation fails: the form is redisplayed with field-level error messages.
+
+### Workflow 2: Instructor Management with Course Assignment
+
+An administrator creates or updates an instructor and assigns them to courses.
+
+1. Staff navigates to `/Instructors/Create` or `/Instructors/Edit/{id}`.
+2. System loads all available courses and marks currently assigned ones (`PopulateAssignedCourseData`).
+3. Staff fills in instructor identity fields, optional office location, and selects course checkboxes.
+4. On POST, `UpdateInstructorCourses` reconciles the submitted `selectedCourses[]` array against existing `CourseAssignment` records:
+   - Courses in the submitted list but not currently assigned → new `CourseAssignment` is added.
+   - Courses currently assigned but not in the submitted list → existing `CourseAssignment` is deleted (set `EntityState.Deleted`).
+5. Office assignment: if `Location` is blank or whitespace, the `OfficeAssignment` record is set to null (deleted).
+6. On success: instructor is saved and an UPDATE notification is sent.
+7. On delete: if the deleted instructor is the `Administrator` of any department, that department's `InstructorID` is set to null before deletion.
+
+### Workflow 3: Department Budget and Concurrency Management
+
+An administrator edits a department's budget or start date; concurrent edits by multiple users are handled.
+
+1. Staff navigates to `/Departments/Edit/{id}`.
+2. System loads the department record, including the `RowVersion` concurrency token.
+3. Staff modifies name, budget, start date, or administrator.
+4. On POST, EF Core checks the submitted `RowVersion` against the current database value.
+5. If `RowVersion` matches: the update proceeds and a notification is enqueued.
+6. If `RowVersion` does not match (`DbUpdateConcurrencyException`): the system reloads the current database values, compares them to the submitted values field-by-field, and presents a conflict resolution page showing both versions.
+
+### Workflow 4: Course Creation with Teaching Material Upload
+
+An administrator creates a new course and optionally uploads a teaching material image.
+
+1. Staff navigates to `/Courses/Create`.
+2. On POST, if a file is attached:
+   - File extension must be one of `.jpg`, `.jpeg`, `.png`, `.gif`, `.bmp` (allow-list validation).
+   - File is saved to `~/Uploads/{CourseID}_{timestamp}{ext}` on the server filesystem.
+   - The relative path is stored in `Course.TeachingMaterialImagePath`.
+3. If no file is attached, `TeachingMaterialImagePath` remains null.
+4. `CourseID` is user-supplied (not auto-generated) — the system does not enforce uniqueness beyond the database primary key constraint.
+5. On success: course saved and CREATE notification enqueued.
+
+### Workflow 5: Notification Queue Processing
+
+Async notifications generated by CRUD operations are queued and can be viewed by staff.
+
+1. Any successful Create/Update/Delete in any controller triggers `BaseController.SendEntityNotification()`.
+2. The notification JSON is serialised and posted to the MSMQ private queue `.\Private$\ContosoUniversityNotifications`.
+3. If MSMQ is unavailable, the exception is caught and silently swallowed — the main operation still succeeds.
+4. Staff views notifications at `/Notifications`.
+5. The `NotificationsController` reads pending messages from the MSMQ queue and displays them (GET) or processes mark-as-read (POST).
+
+## Cross-Service Data Flows
+
+This is a single-process monolith with no inter-service calls. All data flows are intra-process via the shared `SchoolContext`:
+
+- **Instructor Index page** (`/Instructors?id=X&amp;courseID=Y`): A single EF Core query joins Instructors → OfficeAssignments → CourseAssignments → Courses → Enrollments. The response is an `InstructorIndexData` view model aggregating all three levels. No external service calls occur.
+- **Home About page** (`/Home/About`): Executes a `GROUP BY EnrollmentDate` aggregation across all students to produce the `EnrollmentDateGroup` statistics. No caching — query runs on every page load.
+- **Department deletion cascade**: When an instructor is deleted, a separate query updates all departments that reference that instructor as administrator, nulling the `InstructorID` FK before the delete. This is manual cascade logic in application code.
+
+## Business Workflow Sequence
+
+```mermaid
+sequenceDiagram
+    participant Staff as "Staff Member"
+    participant Ctrl as "StudentsController"
+    participant BCtrl as "BaseController"
+    participant DB as "SQL Server"
+    participant NotiSvc as "NotificationService"
+    participant MSMQ as "MSMQ Queue"
+
+    Staff-&gt;&gt;Ctrl: GET /Students/Create
+    Ctrl--&gt;&gt;Staff: Create form (EnrollmentDate = today)
+
+    Staff-&gt;&gt;Ctrl: POST /Students/Create (LastName, FirstMidName, EnrollmentDate)
+    Ctrl-&gt;&gt;Ctrl: Validate CSRF token (AntiForgeryToken)
+    Ctrl-&gt;&gt;Ctrl: Check EnrollmentDate not default/min
+    Ctrl-&gt;&gt;Ctrl: Check EnrollmentDate in SQL Server range
+    Ctrl-&gt;&gt;Ctrl: ModelState.IsValid?
+
+    alt Validation passes
+        Ctrl-&gt;&gt;DB: INSERT INTO Person (Student)
+        DB--&gt;&gt;Ctrl: Student.ID assigned
+        Ctrl-&gt;&gt;BCtrl: SendEntityNotification(Student, id, CREATE)
+        BCtrl-&gt;&gt;NotiSvc: SendNotification with JSON payload
+        alt MSMQ available
+            NotiSvc-&gt;&gt;MSMQ: Enqueue notification message
+            MSMQ--&gt;&gt;NotiSvc: Acknowledged
+        else MSMQ unavailable
+            Note over NotiSvc: Exception swallowed silently
+        end
+        Ctrl--&gt;&gt;Staff: 302 Redirect to /Students (Index)
+    else Validation fails
+        Ctrl--&gt;&gt;Staff: 200 Create form with field errors
+    end
+
+    Staff-&gt;&gt;Ctrl: GET /Students (search, sort, page)
+    Ctrl-&gt;&gt;DB: SELECT Students WHERE name LIKE search ORDER BY sort OFFSET page
+    DB--&gt;&gt;Ctrl: Paginated student rows
+    Ctrl-&gt;&gt;Ctrl: PaginatedList.Create(rows, page, pageSize=10)
+    Ctrl--&gt;&gt;Staff: HTML paginated student list
+```
+
+## Business Rules &amp; Decision Logic
+
+### Validation Rules
+
+| Entity | Rule | Enforcement Point |
+|---|---|---|
+| Student.LastName | Required; max 50 characters | Model annotation + ModelState |
+| Student.FirstMidName | Required; max 50 characters | Model annotation + ModelState |
+| Student.EnrollmentDate | Required; not DateTime.MinValue; must be 1753–9999 | Controller custom validation |
+| Instructor.HireDate | Required; must be 1753–9999 | Model annotation (Range) |
+| Instructor.LastName | Required; max 50 characters | Model annotation |
+| Instructor.FirstMidName | Required; max 50 characters | Model annotation |
+| Course.Title | Required; 3–50 characters | Model annotation |
+| Course.Credits | Range 0–5 | Model annotation |
+| Course.TeachingMaterialImagePath | Max 255 characters; file extension must be jpg/jpeg/png/gif/bmp | Controller allow-list |
+| Department.Name | Required; 3–50 characters | Model annotation |
+| Department.Budget | Money type column; non-negative implied | Model annotation (DataType.Currency) |
+| OfficeAssignment.Location | Max 50 characters; blank = no office | Model annotation + controller null-out logic |
+| All POST actions | CSRF token required | `[ValidateAntiForgeryToken]` attribute |
+
+### Decision Logic
+
+| Decision Point | Logic | Location |
+|---|---|---|
+| Course assignment reconciliation | Compare submitted course IDs to existing CourseAssignments; add missing, remove deselected | `InstructorsController.UpdateInstructorCourses()` |
+| Office assignment removal | If `OfficeAssignment.Location` is whitespace, set `OfficeAssignment = null` | `InstructorsController.Edit()` |
+| Department administrator cleanup | On Instructor delete, null out `Department.InstructorID` for affected departments | `InstructorsController.DeleteConfirmed()` |
+| Concurrency conflict | On `DbUpdateConcurrencyException`, reload current values and present conflict UI | `DepartmentsController.Edit()` |
+| Notification failure | Catch all exceptions from `NotificationService`; swallow silently; do not fail the main operation | `BaseController.SendEntityNotification()` |
+| File upload allowed types | Allow only `.jpg`, `.jpeg`, `.png`, `.gif`, `.bmp` | `CoursesController.Create()` / `Edit()` |
+
+### Cross-Cutting Concerns
+
+| Concern | Implementation | Notes |
+|---|---|---|
+| Transactions | Implicit EF Core `SaveChanges()` transaction | No explicit `TransactionScope` or `BeginTransaction()` used; each `SaveChanges()` is an atomic operation |
+| Error handling | Controller-level try/catch with `ModelState.AddModelError()` | Generic error messages presented to user; technical details logged via `Trace.TraceError()` |
+| Audit / Notifications | Fire-and-forget MSMQ message on every CRUD operation | No persistent audit table; notifications are transient queue messages (may be lost if queue is full or unavailable) |
+| Authorization | None implemented | All routes are publicly accessible; commented-out global `AuthorizeAttribute` was removed |
+| Input binding security | `[Bind(Include = "...")]` allow-lists on all POST actions | Prevents mass-assignment / over-posting of unlisted properties |
+| Concurrency control | Optimistic concurrency via `RowVersion` byte array on `Department` entity | Only Department uses row versioning; other entities have no concurrency protection |
+"></div></div>
+<div id="tab-configuration_inventory_md" class="tab-pane" style="display:none"><div class="markdown-body" id="md-configuration_inventory_md" data-raw="# Configuration &amp; Externalized Settings Inventory
+
+ContosoUniversity has a single configuration source (`Web.config`) with no environment-specific overrides, no secrets management tooling, and no feature flags — all settings are hardcoded in the XML configuration file checked into source control.
+
+## Configuration Sources
+
+| Source | Type | Path/Location | Notes |
+|---|---|---|---|
+| Web.config | XML Application Config | `ContosoUniversity/Web.config` | Primary (and only) configuration file; contains connection strings, appSettings, assembly binding redirects |
+| Properties/AssemblyInfo.cs | Assembly metadata | `ContosoUniversity/Properties/AssemblyInfo.cs` | Assembly version, company, product info |
+| BundleConfig.cs | Code-based config | `App_Start/BundleConfig.cs` | Script and style bundle definitions |
+| RouteConfig.cs | Code-based config | `App_Start/RouteConfig.cs` | MVC routing table |
+| FilterConfig.cs | Code-based config | `App_Start/FilterConfig.cs` | Global MVC filter registrations |
+
+No `appsettings.json`, `appsettings.{Environment}.json`, `launchSettings.json`, Docker Compose, Kubernetes ConfigMaps, Spring Cloud Config server, Azure App Configuration, or HashiCorp Vault references are present.
+
+## Build Profiles
+
+| Profile | Activation | Purpose | Key Dependencies / Plugins |
+|---|---|---|---|
+| Debug | Default in Visual Studio / MSBuild | Development build; includes debug symbols, no optimisation | `DebugSymbols=true`, `DebugType=full`, `Optimize=false`, constants: `DEBUG;TRACE` |
+| Release | Manual (`/p:Configuration=Release` or VS publish) | Production packaging; PDB-only symbols, optimised | `DebugSymbols=true`, `DebugType=pdbonly`, `Optimize=true`, constants: `TRACE` |
+
+No Maven/Gradle profiles, conditional MSBuild targets, or webpack/vite configurations are present.
+
+## Runtime Profiles
+
+| Profile | Activation Method | Config Files | Key Overrides |
+|---|---|---|---|
+| Default (single profile) | N/A — no profile system configured | `Web.config` only | No profile-specific overrides |
+
+The application has no environment-specific configuration files (no `Web.Debug.config` / `Web.Release.config` transforms are configured beyond assembly binding redirects). All environment-specific values (e.g., the database connection string) must be manually edited in `Web.config` before each deployment. This is a significant operational risk for cloud deployment, where environment-specific configuration should be injected via environment variables or a configuration service.
+
+## Properties Inventory
+
+### Connection Strings
+
+| Property Key | Default Value | Environment Override | Notes |
+|---|---|---|---|
+| DefaultConnection | `Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=ContosoUniversityNoAuthEFCore;Integrated Security=True;MultipleActiveResultSets=True` | Not configured | Hardcoded LocalDB path; must be replaced for any non-developer environment |
+
+### Application Settings (appSettings)
+
+| Property Key | Default Value | Type | Notes |
+|---|---|---|---|
+| `webpages:Version` | `3.0.0.0` | string | ASP.NET WebPages version binding |
+| `webpages:Enabled` | `false` | bool | Disables WebMatrix WebPages routing |
+| `ClientValidationEnabled` | `true` | bool | Enables MVC client-side validation |
+| `UnobtrusiveJavaScriptEnabled` | `true` | bool | Enables jQuery unobtrusive validation |
+| `NotificationQueuePath` | `.\Private$\ContosoUniversityNotifications` | string | MSMQ private queue path; hardcoded Windows path; not cloud-portable |
+
+### HTTP Runtime Settings (`system.web`)
+
+| Setting | Value | Notes |
+|---|---|---|
+| `compilation debug` | `true` | Should be `false` in production |
+| `targetFramework` | `4.8` | .NET Framework 4.8 |
+| `maxRequestLength` | `10240` KB (10 MB) | Maximum upload size for HTTP requests |
+| `executionTimeout` | `3600` seconds | 1-hour request timeout — unusually long; review for security |
+
+### IIS / Web Server Settings (`system.webServer`)
+
+| Setting | Value | Notes |
+|---|---|---|
+| `maxAllowedContentLength` | `10485760` bytes (10 MB) | IIS request size limit; matches `maxRequestLength` |
+
+## Startup Parameters &amp; Resource Requirements
+
+| Item | Value | Notes |
+|---|---|---|
+| Runtime | .NET Framework 4.8 | Requires Windows; CLR 4.0 |
+| Web Server | IIS / IIS Express (dev) | Requires Windows; not compatible with Kestrel without migration |
+| JVM/CLR heap | Not explicitly configured | Default CLR garbage collector; no explicit heap tuning |
+| Process model | IIS application pool | Single worker process; no horizontal scaling configuration |
+| Request limits | maxRequestLength: 10 MB; executionTimeout: 3600 s | Defined in Web.config |
+
+No Docker, Kubernetes, Azure App Service, or cloud-specific resource configuration is present.
+
+## Startup Dependency Chain
+
+```
+Application Pool Start
+  → Global.asax Application_Start()
+      → AreaRegistration.RegisterAllAreas()
+      → FilterConfig.RegisterGlobalFilters()
+      → RouteConfig.RegisterRoutes()
+      → BundleConfig.RegisterBundles()
+      → InitializeDatabase()
+          → ConfigurationManager.ConnectionStrings["DefaultConnection"]
+          → new DbContextOptionsBuilder&lt;SchoolContext&gt;().UseSqlServer(connectionString)
+          → DbInitializer.Initialize(context)
+              → context.Database.EnsureCreated()   ← blocks on SQL Server availability
+              → Seed data insertion (if empty)
+  → Application ready (first request served)
+```
+
+**Critical dependency**: SQL Server must be available before the application can finish starting. There are no retry mechanisms, timeout overrides, readiness probes, or health-check endpoints. If the database is unavailable, `EnsureCreated()` will throw an unhandled exception during startup. For cloud/container deployments, a startup retry or readiness probe must be added.
+
+## Secrets &amp; Sensitive Configuration
+
+| Secret Reference | Type | Current Storage | Risk |
+|---|---|---|---|
+| `DefaultConnection` connection string | Database connection | Plain text in `Web.config` — committed to source control | HIGH — credentials (if using SQL auth) or server name exposed in repo |
+| `NotificationQueuePath` | MSMQ queue path | Plain text in `Web.config` | LOW — non-secret path but environment-specific |
+
+&gt; **Note**: The current connection string uses Windows Integrated Security (no username/password visible), but the server name and database name are exposed in source control. In cloud environments using SQL authentication, a plaintext password in `Web.config` would be a critical secret leak.
+
+### Secrets Provisioning Workflow
+
+**Current state**: No secrets management workflow exists. All configuration, including the database connection string, is stored in plain text in `Web.config` and committed to source control. There is no Azure Key Vault, HashiCorp Vault, AWS Secrets Manager, environment variable injection, or any other secrets management mechanism.
+
+**Recommended workflow for cloud migration**:
+1. Remove all secrets from `Web.config` / source control.
+2. Store the database connection string in Azure Key Vault or as an Azure App Service application setting (environment variable).
+3. Use a system-assigned managed identity on the App Service with `get`/`list` permissions on the Key Vault secret.
+4. Reference secrets via `@Microsoft.KeyVault(SecretUri=...)` in App Service configuration or use `Azure.Security.KeyVault.Secrets` SDK at runtime.
+5. For the MSMQ replacement (Azure Service Bus), store the connection string / SAS token in Key Vault.
+
+## Feature Flags
+
+No feature flag framework is configured. The `FilterConfig.cs` contains a commented-out `AuthorizeAttribute` that hints at an in-progress feature, but no feature toggle mechanism (LaunchDarkly, `Microsoft.FeatureManagement`, `IFeatureManager`, etc.) is present.
+
+| Flag / Toggle | Current State | Notes |
+|---|---|---|
+| Global authorization (commented out) | Disabled (commented out) | `// filters.Add(new AuthorizeAttribute())` in FilterConfig.cs |
+
+## Framework &amp; Runtime Versions
+
+| Component | Version | Source |
+|---|---|---|
+| .NET Framework | 4.8 | `ContosoUniversity.csproj` → `TargetFrameworkVersion` |
+| ASP.NET MVC | 5.2.9 | `packages.config` → `Microsoft.AspNet.Mvc` |
+| ASP.NET Razor | 3.2.9 | `packages.config` → `Microsoft.AspNet.Razor` |
+| ASP.NET WebPages | 3.2.9 | `packages.config` → `Microsoft.AspNet.WebPages` |
+| Entity Framework Core | 3.1.32 | `packages.config` → `Microsoft.EntityFrameworkCore` |
+| EF Core SQL Server | 3.1.32 | `packages.config` → `Microsoft.EntityFrameworkCore.SqlServer` |
+| Microsoft.Data.SqlClient | 2.1.4 | `packages.config` → `Microsoft.Data.SqlClient` |
+| System.Messaging (MSMQ) | Built-in (NET 4.8) | .NET Framework built-in |
+| Newtonsoft.Json | 13.0.3 | `packages.config` → `Newtonsoft.Json` |
+| Bootstrap | 5.3.3 | `packages.config` → `bootstrap` |
+| jQuery | 3.7.1 | `packages.config` → `jQuery` |
+| jQuery Validation | 1.21.0 | `packages.config` → `jQuery.Validation` |
+| Microsoft.Identity.Client (MSAL) | 4.21.1 | `packages.config` → `Microsoft.Identity.Client` |
+| System.Web.Optimization | 1.1.3 | `packages.config` → `Microsoft.AspNet.Web.Optimization` |
+| Build tool | MSBuild (Visual Studio 2017+) | `ContosoUniversity.csproj` ToolsVersion="15.0" |
+| Package manager | NuGet (packages.config format) | Legacy format; requires migration to PackageReference |
+"></div></div>
+<div id="tab-data_architecture_md" class="tab-pane" style="display:none"><div class="markdown-body" id="md-data_architecture_md" data-raw="# Data Architecture &amp; Persistence Layer
+
+ContosoUniversity uses a single SQL Server database accessed through Entity Framework Core 3.1 with 9 mapped entities organised around a university domain (students, instructors, courses, departments, and notifications).
+
+## Database Configuration
+
+| Module | DB Type | Environment | Driver | Connection | Migration Tool |
+|---|---|---|---|---|---|
+| ContosoUniversity | SQL Server (LocalDB) | Development | Microsoft.Data.SqlClient 2.1.4 | LocalDb\MSSQLLocalDB; Initial Catalog: ContosoUniversityNoAuthEFCore | Programmatic seed via DbInitializer (no migration tool) |
+| ContosoUniversity | SQL Server | Production | Microsoft.Data.SqlClient 2.1.4 | Connection string in Web.config; replace with environment variable for cloud | No Flyway/Liquibase/EF Migrations configured |
+
+**Schema management**: No EF Core Migrations or third-party migration tool is configured. The database schema is created by EF Core's `EnsureCreated()` called from `DbInitializer.Initialize()` during application startup. `DbInitializer` also seeds reference and test data if the Person table is empty. This approach is not suitable for production use; EF Core Migrations or a dedicated migration tool should be adopted before cloud deployment.
+
+**Seed data**: `DbInitializer.Initialize()` seeds students, instructors, departments, courses, enrollments, course assignments, and office assignments if no people records exist.
+
+## Data Ownership per Service
+
+| Service | Tables Owned | ORM Framework | Caching | Notes |
+|---|---|---|---|---|
+| ContosoUniversity Web | Person (Student/Instructor TPH), Course, Department, Enrollment, CourseAssignment, OfficeAssignment, Notification | Entity Framework Core 3.1 | None | Single bounded context; no schema separation; all tables in default schema |
+
+## Entity Model
+
+```mermaid
+erDiagram
+    Person ||--o{ Enrollment : "Student enrolls in"
+    Person }o--o{ Course : "Instructor assigned via CourseAssignment"
+    Person |o--o| OfficeAssignment : "Instructor has"
+    Course }o--|| Department : "belongs to"
+    Course ||--o{ Enrollment : "has"
+
+    Person {
+        int ID PK
+        string LastName
+        string FirstName
+        string Discriminator   "Student or Instructor"
+        datetime2 EnrollmentDate  "Student only"
+        datetime2 HireDate        "Instructor only"
+    }
+
+    Course {
+        int CourseID PK
+        string Title
+        int Credits
+        int DepartmentID FK
+        string TeachingMaterialImagePath
+    }
+
+    Department {
+        int DepartmentID PK
+        string Name
+        decimal Budget
+        datetime2 StartDate
+        int InstructorID FK
+        bytes RowVersion         "concurrency token"
+    }
+
+    Enrollment {
+        int EnrollmentID PK
+        int CourseID FK
+        int StudentID FK
+        string Grade             "nullable enum: A B C D F"
+    }
+
+    CourseAssignment {
+        int InstructorID PK    "composite PK; FK to Person"
+        int CourseID PK        "composite PK; FK to Course"
+    }
+
+    OfficeAssignment {
+        int InstructorID PK    "shared PK; FK to Person Instructor"
+        string Location
+    }
+
+    Notification {
+        int Id PK
+        string EntityType
+        string EntityId
+        string Operation        "CREATE UPDATE DELETE"
+        string Message
+        datetime2 CreatedAt
+        string CreatedBy
+        bool IsRead
+        datetime2 ReadAt
+    }
+```
+
+## Key Repository Methods
+
+The application does not use the Repository pattern or Spring Data-style repository interfaces. All data access is performed directly via `SchoolContext` (EF Core `DbContext`) from within the controller actions. Notable query patterns are:
+
+| Controller | Access Pattern | Key Query | Purpose |
+|---|---|---|---|
+| StudentsController.Index | `db.Students.Where(...).OrderBy(...)` | Filter by LastName/FirstMidName containing search string, order by various columns | Paginated student list with search and sort |
+| StudentsController.Details | `db.Students.Include(s =&gt; s.Enrollments).ThenInclude(e =&gt; e.Course)` | Eager-load enrollments with course data | Student detail view |
+| InstructorsController.Index | `db.Instructors.Include(Courses).Include(OfficeAssignment).Include(CourseAssignments.Enrollment)` | Multi-level eager load for instructor selection panel | Instructor index with optional course/enrollment details |
+| CoursesController | `db.Courses.Include(c =&gt; c.Department)` | Eager-load department for course list | Course display with department name |
+| DepartmentsController.Edit | EF optimistic concurrency via `RowVersion` byte array | Catches `DbUpdateConcurrencyException` and presents conflict values | Concurrency conflict handling |
+| HomeController.About | `db.Students.GroupBy(s =&gt; s.EnrollmentDate).Select(...)` | Group-by aggregation for enrollment statistics | Home page statistics chart |
+| SchoolContext.OnModelCreating | `modelBuilder.Entity&lt;CourseAssignment&gt;().HasKey(c =&gt; new { c.CourseID, c.InstructorID })` | Composite key configuration | Join table without surrogate key |
+
+## Caching Strategy
+
+No caching layer is implemented. All queries execute directly against SQL Server on every request with no in-memory, distributed, or query-result caching. There is no use of `IMemoryCache`, `IDistributedCache`, `[OutputCache]`, EF Core second-level cache, or any third-party caching library.
+
+**Recommendation**: For cloud deployment, consider:
+- `IMemoryCache` or `IDistributedCache` (Azure Cache for Redis) for reference data (departments, courses) that changes infrequently.
+- EF Core compiled queries for the most frequently executed queries.
+- Output caching on read-only pages (course list, home statistics).
+
+## Data Ownership Boundaries
+
+The application uses a **shared single database** with a single bounded context (`SchoolContext`). There is no schema separation, database-per-service, or logical partitioning.
+
+**TPH Inheritance**: `Person` is the base table for both `Student` and `Instructor` using Table-per-Hierarchy (TPH) with a `Discriminator` string column. This means both entity types share the same `Person` table; columns specific to one type are nullable for the other.
+
+**Cross-entity access**: Controllers access all entities through the single shared `SchoolContext`. There are no cross-service REST calls or event-driven data sync patterns; all reads and writes happen within the same database transaction context.
+
+**Read/write pattern**: All operations are synchronous read/write CRUD. No CQRS, event sourcing, or read-replica pattern is in use.
+
+### Data Classification &amp; Sensitivity
+
+| Entity | Sensitive Fields | Classification | Controls in Place |
+|---|---|---|---|
+| Person (Student) | LastName, FirstMidName, EnrollmentDate | PII | None — no encryption-at-rest, no masking, no field-level access control |
+| Person (Instructor) | LastName, FirstMidName, HireDate | PII | None — same as above |
+| OfficeAssignment | Location (office location) | Low sensitivity | None |
+| Department | Name, Budget, StartDate | Internal business data | None |
+| Course | Title, Credits, TeachingMaterialImagePath | Internal | None |
+| Enrollment | Grade | Academic record (PII-adjacent) | None — no encryption or access control |
+| Notification | EntityType, EntityId, Message, CreatedBy | Operational / audit | None — stored in DB and MSMQ with no access restriction |
+
+**Summary**: Student and instructor personal information (names, dates) is stored without encryption-at-rest, data masking, or column-level access controls. Academic grades are stored in plain text. For GDPR/FERPA or similar regulatory compliance, encryption-at-rest on SQL Server (Transparent Data Encryption), column-level encryption for PII fields, and role-based access controls should be implemented before production deployment.
+"></div></div>
+<div id="tab-dependency_map_md" class="tab-pane" style="display:none"><div class="markdown-body" id="md-dependency_map_md" data-raw="# Dependency Map
+
+ContosoUniversity is an ASP.NET MVC 5 web application targeting .NET Framework 4.8 with 46 declared NuGet dependencies across web, data access, messaging, security, and utility categories.
+
+## Dependencies
+
+```mermaid
+flowchart LR
+    App["ContosoUniversity\n(.NET Framework 4.8)"]
+
+    subgraph Web["Web Frameworks"]
+        ASPMVC["ASP.NET MVC 5.2.9"]
+        Razor["ASP.NET Razor 3.2.9"]
+        WebPages["ASP.NET WebPages 3.2.9"]
+        Bootstrap["Bootstrap 5.3.3"]
+        jQuery["jQuery 3.7.1"]
+        jQueryVal["jQuery Validation 1.21.0"]
+        jQueryUnobtrus["jQuery Unobtrusive Validation 4.0.0"]
+        Optimization["Web.Optimization 1.1.3"]
+        WebGrease["WebGrease 1.5.2"]
+        Modernizr["Modernizr 2.6.2"]
+        Antlr["Antlr 3.4.1"]
+    end
+    subgraph DB["Database / ORM"]
+        EFCore["EF Core 3.1.32"]
+        EFCoreRelational["EF Core Relational 3.1.32"]
+        EFCoreSqlServer["EF Core SqlServer 3.1.32"]
+        EFCoreAbstractions["EF Core Abstractions 3.1.32"]
+        EFCoreTools["EF Core Tools 3.1.32"]
+        SqlClient["Microsoft.Data.SqlClient 2.1.4"]
+        SqlClientSNI["SqlClient SNI Runtime 2.1.1"]
+    end
+    subgraph Messaging["Messaging"]
+        MSMQBuiltin["System.Messaging (MSMQ)\nbuilt-in .NET Framework"]
+    end
+    subgraph Sec["Security"]
+        MSAL["Microsoft.Identity.Client 4.21.1"]
+    end
+    subgraph Extensions["Microsoft.Extensions"]
+        DI["DI Abstractions 3.1.32"]
+        DIImpl["DI 3.1.32"]
+        Logging["Logging Abstractions 3.1.32"]
+        LoggingImpl["Logging 3.1.32"]
+        Config["Configuration 3.1.32"]
+        ConfigAbstr["Configuration Abstractions 3.1.32"]
+        ConfigBinder["Configuration Binder 3.1.32"]
+        Caching["Caching Abstractions 3.1.32"]
+        CachingMemory["Caching Memory 3.1.32"]
+        Options["Options 3.1.32"]
+        Primitives["Primitives 3.1.32"]
+    end
+    subgraph Util["Utilities"]
+        Newtonsoft["Newtonsoft.Json 13.0.3"]
+        WebInfra["Microsoft.Web.Infrastructure 2.0.1"]
+        Roslyn["CodeDom DotNetCompilerPlatform 2.0.1"]
+        NetStandard["NETStandard.Library 2.0.3"]
+        Buffers["System.Buffers 4.5.1"]
+        ImmutableCollections["System.Collections.Immutable 1.7.1"]
+        ComponentAnnotations["System.ComponentModel.Annotations 4.7.0"]
+        DiagSource["System.Diagnostics.DiagnosticSource 4.7.1"]
+        Memory["System.Memory 4.5.4"]
+        Numerics["System.Numerics.Vectors 4.5.0"]
+        CompilerUnsafe["System.Runtime.CompilerServices.Unsafe 4.5.3"]
+        TasksExtensions["System.Threading.Tasks.Extensions 4.5.4"]
+        BclAsync["Microsoft.Bcl.AsyncInterfaces 1.1.1"]
+        BclHashCode["Microsoft.Bcl.HashCode 1.1.1"]
+    end
+
+    App --&gt;|"web framework"| Web
+    App --&gt;|"data access"| DB
+    App --&gt;|"messaging"| Messaging
+    App --&gt;|"security"| Sec
+    App --&gt;|"platform extensions"| Extensions
+    App --&gt;|"utilities"| Util
+    EFCoreAbstractions -.-&gt;|"used by"| EFCore
+    DI -.-&gt;|"used by"| EFCore
+    Logging -.-&gt;|"used by"| EFCore
+```
+
+### Dependency Summary
+
+| Category | Count | Key Libraries | Notes |
+|---|---|---|---|
+| Web Frameworks | 11 | ASP.NET MVC 5.2.9, Bootstrap 5.3.3, jQuery 3.7.1, Web.Optimization 1.1.3 | Legacy MVC stack; System.Web not compatible with .NET Core |
+| Database / ORM | 7 | EF Core 3.1.32 (EOL), Microsoft.Data.SqlClient 2.1.4 | EF Core 3.1 is end-of-life since Dec 2022 |
+| Messaging | 1 | System.Messaging (MSMQ) — built-in | Windows-only; not available on .NET Core; major migration blocker |
+| Security | 1 | Microsoft.Identity.Client 4.21.1 | MSAL present but no auth is implemented |
+| Microsoft.Extensions | 11 | DI, Logging, Configuration, Caching, Options 3.1.32 | All at EOL 3.1.32; must be upgraded |
+| Utilities | 14 | Newtonsoft.Json 13.0.3, System.Memory 4.5.4, NETStandard.Library 2.0.3 | Several polyfill packages only needed on .NET Framework |
+
+### Version &amp; Compatibility Risks
+
+The most significant risk is the **ASP.NET MVC 5 / System.Web dependency** — the entire web stack (System.Web.Mvc, System.Web.Optimization, System.Web.Routing) is incompatible with .NET Core and must be replaced with ASP.NET Core MVC. **Entity Framework Core 3.1** reached end-of-life in December 2022 and does not receive security patches; it must be upgraded to EF Core 8.x or later. All **Microsoft.Extensions.*** packages (DI, Logging, Configuration, Caching) are at version 3.1.32 — also EOL. **System.Messaging (MSMQ)** is a Windows-only built-in .NET Framework library with no .NET Core equivalent; migration to Azure Service Bus or another cloud messaging service is required. **Microsoft.Data.SqlClient 2.1.4** is several major versions behind the current 5.x release and has known CVE vulnerabilities. **Modernizr 2.6.2** is significantly outdated (last release 2013) and may contain security issues; consider removing it.
+
+### Notable Observations
+
+- **MSAL installed but unused**: `Microsoft.Identity.Client 4.21.1` is declared as a dependency but the application implements no authentication or authorization — all routes are anonymous. This library should either be activated or removed.
+- **Polyfill packages can be removed after .NET migration**: Packages like `System.Buffers`, `System.Memory`, `System.Threading.Tasks.Extensions`, `Microsoft.Bcl.AsyncInterfaces`, and `System.Numerics.Vectors` are backports for .NET Framework compatibility and are built-in on .NET 5+. They can be removed after migration.
+- **NETStandard.Library 2.0.3 as explicit dependency**: This is a meta-package that should not typically be referenced directly in .NET Framework projects; it indicates a non-standard setup.
+- **No dedicated logging library declared**: The project uses custom `LoggingService` wrapping `System.Diagnostics.Debug.WriteLine` but no structured logging library (Serilog, NLog, Microsoft.Extensions.Logging providers) is declared.
+
+## Test Dependencies
+
+No test project or test-scoped dependencies were detected in the solution.
+
+Total test-scope dependencies: 0
+
+The solution contains no test project and no test framework references (xUnit, NUnit, MSTest, etc.). Adding a test project with unit and integration tests is strongly recommended before beginning the modernization effort.
+"></div></div>
+
+</div>
+
+</div>
+
+<script>
+mermaid.initialize({startOnLoad:false,theme:'neutral'});
+
+function toggle(id){
+  var el=document.getElementById('detail-'+id);
+  el.style.display=el.style.display==='none'?'table-row':'none';
+}
+
+function showTab(id){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.style.display='none');
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  var pane=document.getElementById('tab-'+id);
+  if(pane){
+    pane.style.display='block';
+    var mdEl=pane.querySelector('.markdown-body');
+    if(mdEl&&!mdEl._rendered){
+      mdEl._rendered=true;
+      var raw=mdEl.getAttribute('data-raw');
+      var decoded=raw.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+      mdEl.innerHTML=marked.parse(decoded);
+      mdEl.querySelectorAll('pre code.language-mermaid,code.language-mermaid').forEach(function(el){
+        var div=document.createElement('div');
+        div.className='mermaid';
+        div.textContent=el.textContent;
+        el.parentNode.replaceWith(div);
+      });
+      mermaid.run({nodes:mdEl.querySelectorAll('.mermaid')});
+    }
+  }
+  var btn=document.getElementById('btn-'+id);
+  if(btn)btn.classList.add('active');
+}
+
+// Auto-show first fact tab
+var firstTab=document.querySelector('.tab-btn');
+if(firstTab)firstTab.click();
+</script>
+</body>
+</html>
