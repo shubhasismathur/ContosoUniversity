@@ -1,0 +1,79 @@
+{
+  "input_name": "CWE - File & Path Security",
+  "analysis_method": "LLM",
+  "status": "success",
+  "result": {
+    "finding": "Assessed 5 CWE rules in File & Path Security: 2 FOUND, 3 NOT_FOUND",
+    "confidence": "high",
+    "evidence": ["Scanned Controllers/CoursesController.cs for file upload and path handling patterns"],
+    "values": [
+      {
+        "id": "CWE-22",
+        "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+        "status": "FOUND",
+        "category": "File & Path Security",
+        "severity": "optional",
+        "storyPoint": 8,
+        "description": "The product uses external input to construct a pathname that is intended to identify a file or directory that is located underneath a restricted parent directory, but the product does not properly neutralize special elements within the pathname that can cause the pathname to resolve to a location that is outside of the restricted directory.",
+        "evidence": {
+          "files": ["ContosoUniversity/Controllers/CoursesController.cs"],
+          "explanation": "In CoursesController.DeleteConfirmed (line ~229), the file path is reconstructed using `Server.MapPath(course.TeachingMaterialImagePath)` where `TeachingMaterialImagePath` is a value read from the database — but during the Create/Edit POST, the `[Bind]` attribute includes `TeachingMaterialImagePath` in the bound field list, meaning an attacker could submit a crafted value such as `~/../../sensitive/file` in the POST body, which could then be persisted to the database and subsequently used in `Server.MapPath()` to resolve a path outside the web root. There is no validation or sanitization of the `TeachingMaterialImagePath` field value before it is stored or used in file system operations."
+        }
+      },
+      {
+        "id": "CWE-23",
+        "name": "Relative Path Traversal",
+        "status": "NOT_FOUND",
+        "category": "File & Path Security",
+        "severity": "optional",
+        "storyPoint": 5,
+        "description": "The product uses external input to construct a pathname that should be within a restricted directory, but it does not properly neutralize sequences such as .. that can resolve to a location that is outside of that directory.",
+        "evidence": {
+          "files": [],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "CWE-36",
+        "name": "Absolute Path Traversal",
+        "status": "NOT_FOUND",
+        "category": "File & Path Security",
+        "severity": "optional",
+        "storyPoint": 5,
+        "description": "The product uses external input to construct a pathname that should be within a restricted directory, but it does not properly neutralize absolute path sequences such as /abs/path that can resolve to a location that is outside of that directory.",
+        "evidence": {
+          "files": [],
+          "explanation": ""
+        }
+      },
+      {
+        "id": "CWE-434",
+        "name": "Unrestricted Upload of File with Dangerous Type",
+        "status": "FOUND",
+        "category": "File & Path Security",
+        "severity": "mandatory",
+        "storyPoint": 8,
+        "description": "The product allows the upload or transfer of dangerous file types that are automatically processed within its environment.",
+        "evidence": {
+          "files": ["ContosoUniversity/Controllers/CoursesController.cs"],
+          "explanation": "CoursesController.Create (line ~55) and CoursesController.Edit (line ~128) accept file uploads and validate the file type using only the file extension (`Path.GetExtension(teachingMaterialImage.FileName).ToLower()`). This check can be bypassed: (1) the MIME type / Content-Type header is not verified against the actual file content, allowing an attacker to upload a file with a valid image extension (e.g., `.jpg`) that contains executable script content; (2) on some IIS configurations, double extensions (e.g., `shell.asp;.jpg`) can bypass extension-only checks. The allowed extension list (`jpg`, `jpeg`, `png`, `gif`, `bmp`) is client-supplied filename-based only — no magic byte / file signature validation is performed."
+        }
+      },
+      {
+        "id": "CWE-611",
+        "name": "Improper Restriction of XML External Entity Reference",
+        "status": "NOT_FOUND",
+        "category": "File & Path Security",
+        "severity": "optional",
+        "storyPoint": 5,
+        "description": "The product processes an XML document that can contain XML entities with URIs that resolve to documents outside of the intended sphere of control, causing the product to embed incorrect documents into its output.",
+        "evidence": {
+          "files": [],
+          "explanation": ""
+        }
+      }
+    ]
+  },
+  "execution_time_seconds": 0,
+  "timestamp": "2026-08-06T11:55:00Z"
+}

@@ -1,0 +1,266 @@
+{
+  "metadata": {
+    "appCATVersion": "1.0.1127",
+    "analysisStartTime": "2026-08-06T11:50:11Z",
+    "analysisEndTime": "2026-08-06T11:50:55Z",
+    "source": "Solution",
+    "target": "Any",
+    "privacyMode": "Restricted"
+  },
+  "projects": [
+    {
+      "projectPath": "ContosoUniversity/ContosoUniversity.csproj",
+      "projectName": "ContosoUniversity",
+      "targetFramework": "net48",
+      "projectType": "WebApplication",
+      "language": "CSharp"
+    }
+  ],
+  "summary": {
+    "totalIncidents": 18,
+    "criticalIncidents": 4,
+    "majorIncidents": 9,
+    "minorIncidents": 5
+  },
+  "incidents": [
+    {
+      "id": "UA001",
+      "category": "Mandatory",
+      "effort": "High",
+      "title": "System.Messaging (MSMQ) is not supported on .NET Core / .NET 5+",
+      "description": "The application uses System.Messaging for MSMQ-based notification queuing. System.Messaging is a Windows-only, .NET Framework library that is not available in .NET Core or .NET 5+.",
+      "recommendation": "Replace MSMQ with a cloud-native messaging service such as Azure Service Bus, Azure Queue Storage, or RabbitMQ via the MassTransit or NServiceBus abstraction libraries.",
+      "affectedFiles": [
+        "Services/NotificationService.cs"
+      ],
+      "apiChange": "System.Messaging.MessageQueue -> Azure.Messaging.ServiceBus.ServiceBusClient"
+    },
+    {
+      "id": "UA002",
+      "category": "Mandatory",
+      "effort": "High",
+      "title": "System.Web.* namespace is not available in .NET Core / .NET 5+",
+      "description": "The project heavily depends on System.Web.Mvc, System.Web.Optimization, System.Web.Routing and other System.Web types which do not exist in .NET Core.",
+      "recommendation": "Migrate to ASP.NET Core MVC. Replace System.Web.Mvc.Controller with Microsoft.AspNetCore.Mvc.Controller, update routing to attribute-based or endpoint routing, replace BundleConfig with Bundler & Minifier or Webpack.",
+      "affectedFiles": [
+        "Global.asax.cs",
+        "App_Start/RouteConfig.cs",
+        "App_Start/BundleConfig.cs",
+        "App_Start/FilterConfig.cs",
+        "Controllers/BaseController.cs",
+        "Controllers/StudentsController.cs",
+        "Controllers/CoursesController.cs",
+        "Controllers/DepartmentsController.cs",
+        "Controllers/InstructorsController.cs",
+        "Controllers/NotificationsController.cs",
+        "Controllers/HomeController.cs"
+      ],
+      "apiChange": "System.Web.Mvc.Controller -> Microsoft.AspNetCore.Mvc.Controller"
+    },
+    {
+      "id": "UA003",
+      "category": "Mandatory",
+      "effort": "Medium",
+      "title": "ConfigurationManager is not the recommended configuration approach in .NET Core",
+      "description": "System.Configuration.ConfigurationManager is used to read connection strings and app settings from Web.config. In .NET Core, Web.config is not the primary configuration mechanism.",
+      "recommendation": "Replace ConfigurationManager with Microsoft.Extensions.Configuration (IConfiguration) and use appsettings.json. Inject IConfiguration via dependency injection.",
+      "affectedFiles": [
+        "Services/NotificationService.cs",
+        "Global.asax.cs"
+      ],
+      "apiChange": "System.Configuration.ConfigurationManager -> Microsoft.Extensions.Configuration.IConfiguration"
+    },
+    {
+      "id": "UA004",
+      "category": "Mandatory",
+      "effort": "Medium",
+      "title": "Global.asax / HttpApplication startup pattern not supported in .NET Core",
+      "description": "The application relies on Global.asax and HttpApplication lifecycle for application startup and initialization. .NET Core uses the Program.cs / Startup.cs (or top-level statements) model.",
+      "recommendation": "Migrate startup code to Program.cs using the WebApplication builder pattern. Move database initialization to IHostedService or application startup.",
+      "affectedFiles": [
+        "Global.asax.cs",
+        "Global.asax"
+      ],
+      "apiChange": "HttpApplication.Application_Start -> WebApplication.CreateBuilder / app.Run()"
+    },
+    {
+      "id": "UA005",
+      "category": "Recommended",
+      "effort": "Medium",
+      "title": "Entity Framework Core 3.1 is end-of-life; upgrade to EF Core 8+",
+      "description": "The project uses EF Core 3.1.32 which reached end-of-life in December 2022. This version does not receive security patches.",
+      "recommendation": "Upgrade to EF Core 8.x (for .NET 8) or EF Core 9.x (for .NET 9+). Review breaking changes in the EF Core migration guide.",
+      "affectedFiles": [
+        "Data/SchoolContext.cs",
+        "packages.config"
+      ],
+      "apiChange": "Microsoft.EntityFrameworkCore 3.1.x -> Microsoft.EntityFrameworkCore 8.x"
+    },
+    {
+      "id": "UA006",
+      "category": "Recommended",
+      "effort": "Low",
+      "title": "Web.config should be replaced with appsettings.json",
+      "description": "Connection strings and application settings stored in Web.config are .NET Framework / IIS specific. Modern .NET applications use appsettings.json with optional environment-specific overrides.",
+      "recommendation": "Migrate connection strings and appSettings keys to appsettings.json. Use environment variables or Azure App Configuration for environment-specific settings.",
+      "affectedFiles": [
+        "Web.config"
+      ],
+      "apiChange": "Web.config connectionStrings/appSettings -> appsettings.json"
+    },
+    {
+      "id": "UA007",
+      "category": "Recommended",
+      "effort": "Low",
+      "title": "Manual dependency instantiation; no dependency injection container",
+      "description": "The application manually instantiates SchoolContext and NotificationService in BaseController constructors rather than using a DI container.",
+      "recommendation": "Register services in Program.cs using builder.Services. Inject IDbContextFactory<SchoolContext> or SchoolContext directly through controller constructors. Register NotificationService as a scoped or singleton service.",
+      "affectedFiles": [
+        "Controllers/BaseController.cs",
+        "Data/SchoolContextFactory.cs"
+      ],
+      "apiChange": "Manual new() instantiation -> IServiceProvider / constructor injection"
+    },
+    {
+      "id": "UA008",
+      "category": "Recommended",
+      "effort": "Medium",
+      "title": "SQL Server LocalDB used for development - should use a configurable connection",
+      "description": "The connection string points to SQL Server LocalDB which is a developer tool and not suitable for cloud or container deployments.",
+      "recommendation": "Use environment variables or Key Vault references for database connection strings. For cloud deployment target Azure SQL Database or Azure SQL Managed Instance.",
+      "affectedFiles": [
+        "Web.config"
+      ],
+      "apiChange": "LocalDB connection string -> Environment variable / Azure Key Vault reference"
+    },
+    {
+      "id": "UA009",
+      "category": "Optional",
+      "effort": "Low",
+      "title": "CSRF protection uses legacy AntiForgeryToken pattern",
+      "description": "The application uses Html.AntiForgeryToken() and [ValidateAntiForgeryToken] which are ASP.NET MVC 5 patterns. ASP.NET Core MVC uses IAntiforgery service and [AutoValidateAntiforgeryToken].",
+      "recommendation": "After migration to ASP.NET Core, use the built-in antiforgery service. Consider using [AutoValidateAntiforgeryToken] at the application level.",
+      "affectedFiles": [
+        "Controllers/StudentsController.cs",
+        "Controllers/CoursesController.cs",
+        "Controllers/DepartmentsController.cs",
+        "Controllers/InstructorsController.cs"
+      ],
+      "apiChange": "Html.AntiForgeryToken() -> IAntiforgery / [AutoValidateAntiforgeryToken]"
+    },
+    {
+      "id": "UA010",
+      "category": "Optional",
+      "effort": "Low",
+      "title": "File upload uses HttpPostedFileBase which is not available in .NET Core",
+      "description": "The CoursesController uses HttpPostedFileBase for file uploads, which is a System.Web type.",
+      "recommendation": "Replace HttpPostedFileBase with IFormFile from Microsoft.AspNetCore.Http.",
+      "affectedFiles": [
+        "Controllers/CoursesController.cs"
+      ],
+      "apiChange": "System.Web.HttpPostedFileBase -> Microsoft.AspNetCore.Http.IFormFile"
+    },
+    {
+      "id": "UA011",
+      "category": "Mandatory",
+      "effort": "High",
+      "title": "packages.config NuGet format must be migrated to PackageReference",
+      "description": "The project uses the legacy packages.config NuGet package management format. Modern .NET SDK-style projects use PackageReference in .csproj.",
+      "recommendation": "Migrate from packages.config to PackageReference format using Visual Studio or the nuget migrate command. This is required before migrating to SDK-style project format.",
+      "affectedFiles": [
+        "packages.config"
+      ],
+      "apiChange": "packages.config -> PackageReference in .csproj"
+    },
+    {
+      "id": "UA012",
+      "category": "Mandatory",
+      "effort": "High",
+      "title": "Non-SDK project format (.csproj) must be converted to SDK-style",
+      "description": "The project uses the old .NET Framework MSBuild project format which is not compatible with .NET 5+ SDK-style projects.",
+      "recommendation": "Convert to SDK-style project format by rewriting the .csproj file with <Project Sdk=\"Microsoft.NET.Sdk.Web\">. Use the Upgrade Assistant tool for automated conversion.",
+      "affectedFiles": [
+        "ContosoUniversity.csproj"
+      ],
+      "apiChange": "Old MSBuild format -> SDK-style <Project Sdk=\"Microsoft.NET.Sdk.Web\">"
+    },
+    {
+      "id": "UA013",
+      "category": "Recommended",
+      "effort": "Medium",
+      "title": "Newtonsoft.Json should be replaced with System.Text.Json for new .NET targets",
+      "description": "The project uses Newtonsoft.Json 13.x. While this library still works in .NET Core, the built-in System.Text.Json is generally preferred for new development in .NET 5+.",
+      "recommendation": "Consider replacing Newtonsoft.Json with System.Text.Json where possible, particularly for simple serialization scenarios. Retain Newtonsoft.Json where complex serialization is needed.",
+      "affectedFiles": [
+        "Services/NotificationService.cs",
+        "packages.config"
+      ],
+      "apiChange": "Newtonsoft.Json.JsonConvert -> System.Text.Json.JsonSerializer"
+    },
+    {
+      "id": "UA014",
+      "category": "Optional",
+      "effort": "Low",
+      "title": "Razor views (.cshtml) need minor syntax updates for ASP.NET Core",
+      "description": "Existing CSHTML views use ASP.NET MVC 5 HTML helpers (Html.BeginForm, Html.TextBoxFor, etc.). ASP.NET Core Razor uses Tag Helpers as the preferred approach.",
+      "recommendation": "Consider migrating HTML helpers to Tag Helpers (asp-action, asp-controller, asp-for attributes) for better readability. HTML helpers still work in ASP.NET Core.",
+      "affectedFiles": [
+        "Views/Students/Create.cshtml",
+        "Views/Students/Edit.cshtml",
+        "Views/Courses/Create.cshtml",
+        "Views/Departments/Create.cshtml"
+      ],
+      "apiChange": "Html.BeginForm / Html.TextBoxFor -> Tag Helpers (asp-action, asp-for)"
+    },
+    {
+      "id": "UA015",
+      "category": "Recommended",
+      "effort": "Low",
+      "title": "Logging uses System.Diagnostics.Debug.WriteLine instead of ILogger",
+      "description": "The application uses System.Diagnostics.Debug.WriteLine and a custom LoggingService instead of the .NET standard ILogger<T> abstraction.",
+      "recommendation": "Replace with Microsoft.Extensions.Logging.ILogger<T>. This provides structured logging, multiple sinks (console, Application Insights, etc.), and configuration-based log levels.",
+      "affectedFiles": [
+        "Services/LoggingService.cs",
+        "Controllers/BaseController.cs",
+        "Services/NotificationService.cs"
+      ],
+      "apiChange": "System.Diagnostics.Debug.WriteLine -> Microsoft.Extensions.Logging.ILogger<T>"
+    },
+    {
+      "id": "UA016",
+      "category": "Optional",
+      "effort": "Low",
+      "title": "No authentication or authorization implemented",
+      "description": "The application has no authentication or authorization. Controllers and actions are all publicly accessible.",
+      "recommendation": "For production cloud deployment, add ASP.NET Core Identity, Azure AD / Entra ID authentication, or another identity provider. Use [Authorize] attributes to protect sensitive operations.",
+      "affectedFiles": [
+        "Controllers/BaseController.cs"
+      ],
+      "apiChange": "No auth -> Microsoft.AspNetCore.Authentication / [Authorize] attribute"
+    },
+    {
+      "id": "UA017",
+      "category": "Recommended",
+      "effort": "Medium",
+      "title": "File uploads stored on local filesystem; not suitable for cloud scale-out",
+      "description": "The CoursesController saves uploaded files to the server local filesystem (~/Uploads). This pattern does not work in horizontally scaled or ephemeral cloud environments.",
+      "recommendation": "Store uploaded files in Azure Blob Storage or another cloud object store. Use the Azure.Storage.Blobs SDK and return a URL/reference rather than a file path.",
+      "affectedFiles": [
+        "Controllers/CoursesController.cs"
+      ],
+      "apiChange": "Server.MapPath + File.Save -> Azure.Storage.Blobs.BlobContainerClient"
+    },
+    {
+      "id": "UA018",
+      "category": "Recommended",
+      "effort": "Low",
+      "title": "Table-per-Hierarchy (TPH) inheritance for Person entity needs verification with newer EF Core",
+      "description": "The SchoolContext configures TPH inheritance for the Person entity (Student/Instructor). EF Core 7+ changed how TPH discriminators work by default.",
+      "recommendation": "After upgrading to EF Core 7+, verify TPH behavior still works as expected. Consider explicit discriminator column type configuration.",
+      "affectedFiles": [
+        "Data/SchoolContext.cs"
+      ],
+      "apiChange": "EF Core 3.1 TPH -> EF Core 7+ TPH (verify discriminator configuration)"
+    }
+  ]
+}
