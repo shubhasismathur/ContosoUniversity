@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks template for modernization plan. Generate this file alongside plan.md to track individual migration tasks.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-dotnet",
+      "description": "Upgrade the project from .NET Framework 4.8 to .NET 10 (net10.0), converting the legacy non-SDK-style project file to SDK-style format to enable modern Azure SDK usage and cloud-native deployment.",
+      "reason": ".NET Framework 4.8 is outside the mainstream support path and cannot reliably consume modern Azure SDK (Azure.*) packages. Upgrading to .NET 10 is required before any Azure service migrations can be performed.",
+      "requirements": "Upgrade target framework from .NET Framework 4.8 (net482) to .NET 10 (net10.0). Convert the legacy MSBuild project file (ContosoUniversity.csproj) to SDK-style format. Migrate from packages.config to PackageReference. Ensure the ASP.NET MVC 5 application can run on .NET 10 (migrate to ASP.NET Core MVC if needed). The project must build successfully and all existing unit tests must pass after the upgrade.",
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "002-transform-sql-to-azure-sql",
+      "description": "Migrate the application's SQL Server database connection to Azure SQL Database using Managed Identity (passwordless authentication), removing hard-coded connection strings.",
+      "reason": "The application currently uses a LocalDB connection string with Integrated Security. Moving to Azure SQL Database with Managed Identity eliminates credentials from configuration and aligns with cloud security best practices.",
+      "requirements": "Migrate the Entity Framework Core database context (SchoolContext) to connect to Azure SQL Database using Managed Identity (DefaultAzureCredential / passwordless authentication). Remove or replace the hard-coded connection string in Web.config / appsettings. The application must build and all unit tests must pass after migration.",
+      "dependencies": ["001-upgrade-dotnet"],
+      "skills": [
+        {
+          "name": "migration-azure-sql-database",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "transform",
+      "id": "003-transform-msmq-to-servicebus",
+      "description": "Migrate the MSMQ-based notification queue service (NotificationService using System.Messaging) to Azure Service Bus with Managed Identity authentication.",
+      "reason": "MSMQ (System.Messaging) is a Windows-only technology not available in cloud/containerized environments. Azure Service Bus provides a cloud-native, scalable messaging solution with Managed Identity support.",
+      "requirements": "Replace the System.Messaging / MSMQ implementation in NotificationService with Azure Service Bus SDK. Use Managed Identity (DefaultAzureCredential) for authentication. Preserve the existing send/receive notification semantics. Remove the NotificationQueuePath app setting and replace with Azure Service Bus connection configuration. The application must build and all unit tests must pass after migration.",
+      "dependencies": ["002-transform-sql-to-azure-sql"],
+      "skills": [
+        {
+          "name": "migration-azure-servicebus",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "004-security-cve-remediation",
+      "description": "Scan all project dependencies for known CVEs and remediate any identified vulnerabilities to ensure the application is secure before deployment.",
+      "reason": "The project uses several older package versions (e.g., Microsoft.EntityFrameworkCore 3.1.32, Microsoft.Data.SqlClient 2.1.4, Microsoft.Identity.Client 4.21.1) that may have known CVEs. Security remediation must be completed before the application is considered production-ready.",
+      "requirements": "Upgrade vulnerable dependencies to the minimum patched version. If a CVE fix requires a major version upgrade, document the affected dependency, the current version, the upgraded major version, and the breaking change risk. Verify that the project builds and all tests pass after remediation.",
+      "dependencies": ["003-transform-msmq-to-servicebus"],
+      "skills": [
+        {
+          "name": "validate-cves-and-fix",
+          "location": "builtin"
+        }
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "passUnitTests": "true"
+      }
+    }
+  ],
+  "metadata": {
+    "planName": "modrrnization_plan",
+    "projectName": "ContosoUniversity",
+    "language": "dotnet",
+    "createdAt": "2026-08-06T12:57:04Z",
+    "version": "1.0"
+  }
+}
