@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "id": "20260806112037",
+    "analysisStartTime": "2026-08-06T11:20:37Z",
+    "note": "Assessment report generated in Linux environment"
+  },
+  "issues": [],
+  "security": [
+    {
+      "id": "CWE-732",
+      "title": "Incorrect Permission Assignment for Critical Resource",
+      "category": "Credentials & Secrets",
+      "severity": "optional",
+      "description": "The product specifies permissions for a security-critical resource in a way that allows that resource to be read or modified by unintended actors.",
+      "evidence": {
+        "files": [
+          "Services/NotificationService.cs:23"
+        ],
+        "explanation": "`NotificationService` grants `MessageQueueAccessRights.FullControl` to `Everyone` when creating the queue (`_queue.SetPermissions(\"Everyone\", MessageQueueAccessRights.FullControl)`), allowing broad read/write access to a critical messaging resource."
+      },
+      "storyPoint": 5
+    }
+  ],
+  "rules": {},
+  "projects": [
+    {
+      "properties": {
+        "repo": "ContosoUniversity",
+        "languages": [
+          "C#"
+        ],
+        "frameworks": [
+          "ASP.NET MVC 5",
+          "Entity Framework Core 3.1"
+        ],
+        "tools": [
+          "MSBuild"
+        ]
+      },
+      "incidents": []
+    }
+  ]
+}
