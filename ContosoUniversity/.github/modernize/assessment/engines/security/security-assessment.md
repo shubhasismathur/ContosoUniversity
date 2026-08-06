@@ -17,7 +17,7 @@
 
 | Severity | Count |
 |----------|-------|
-| mandatory | 1 |
+| mandatory | 2 |
 | optional | 4 |
 | potential | 3 |
 

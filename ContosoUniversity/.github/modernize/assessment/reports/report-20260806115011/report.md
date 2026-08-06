@@ -17,7 +17,7 @@
 | Category | Count |
 |---|---|
 | Total Modernization Issues | 18 |
-| Mandatory | 4 |
+| Mandatory | 6 |
 | Recommended | 9 |
 | Optional | 5 |
 | Security Findings (CVE + CWE) | 8 |
@@ -346,16 +346,6 @@ The application has no authentication or authorization. Controllers and actions 
 - **Category:** CVE
 
 [CVE-2024-0056](https://github.com/advisories/GHSA-98g6-xh36-x2p7): Microsoft.Data.SqlClient and System.Data.SqlClient vulnerable to SQL Data Provider Security Feature Bypass
-
-Severity: HIGH
-
-Affected dependencies:
-  - Microsoft.Data.SqlClient@2.1.4 (declared at packages.config) — affected range: < 2.1.7
-
-Recommended fix:
-  - Upgrade Microsoft.Data.SqlClient to 2.1.7 or later
-
-**Details:** [CVE-2024-0056](https://github.com/advisories/GHSA-98g6-xh36-x2p7): Microsoft.Data.SqlClient and System.Data.SqlClient vulnerable to SQL Data Provider Security Feature Bypass
 
 Severity: HIGH
 
